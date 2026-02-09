@@ -182,11 +182,11 @@ Public Documents (for sync):
 ## Screenshots
 
 <p align="center">
-  <img src="images/dashboard.png" width="250" alt="Dashboard with box selector and stats">
+  <img src="images/dashboard.jpg" width="250" alt="Dashboard with box selector and stats">
   &nbsp;&nbsp;
-  <img src="images/grid-view.png" width="250" alt="BOXALL-144 grid view with color-coded compartments">
+  <img src="images/grid-view.jpg" width="250" alt="BOXALL-144 grid view with color-coded compartments">
   &nbsp;&nbsp;
-  <img src="images/component-details.png" width="250" alt="Component details with edit, relocate, and stock adjustment">
+  <img src="images/component-details.jpg" width="250" alt="Component details with edit, relocate, and stock adjustment">
 </p>
 
 <p align="center">
