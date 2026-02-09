@@ -1,0 +1,202 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="BOX_ALL.Views.ExportSelectPage"
+             Title="Export Data"
+             BackgroundColor="{StaticResource BackgroundDark}">
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+
+        <!-- Header -->
+        <Frame Grid.Row="0" 
+               BackgroundColor="{StaticResource Surface}"
+               BorderColor="Transparent"
+               Padding="15"
+               Margin="10,10,10,0">
+            <VerticalStackLayout Spacing="5">
+                <Label Text="Select boxes to export:" 
+                       TextColor="{StaticResource TextPrimary}"
+                       FontSize="16"
+                       FontFamily="UbuntuRegular"/>
+                <Label Text="Each box will be saved as a separate JSON file in Downloads/boxall-backup/" 
+                       TextColor="{StaticResource TextSecondary}"
+                       FontSize="12"
+                       FontFamily="UbuntuCondensed"/>
+            </VerticalStackLayout>
+        </Frame>
+
+        <!-- Box List -->
+        <CollectionView Grid.Row="1"
+                        ItemsSource="{Binding AvailableBoxes}"
+                        Margin="10"
+                        SelectionMode="None">
+            <CollectionView.ItemTemplate>
+                <DataTemplate>
+                    <Frame BackgroundColor="{StaticResource Surface}"
+                           BorderColor="Transparent"
+                           Padding="10"
+                           Margin="0,5">
+                        <Grid ColumnDefinitions="Auto,*" ColumnSpacing="10">
+                            <CheckBox Grid.Column="0"
+                                      IsChecked="{Binding IsSelected}"
+                                      Color="{StaticResource Success}"
+                                      VerticalOptions="Center"/>
+
+                            <VerticalStackLayout Grid.Column="1" Spacing="3">
+                                <Label Text="{Binding Name}"
+                                       TextColor="{StaticResource Primary}"
+                                       FontFamily="UbuntuRegular"
+                                       FontAttributes="Bold"
+                                       FontSize="15"/>
+
+                                <Grid ColumnDefinitions="Auto,Auto,Auto" ColumnSpacing="15">
+                                    <Label Grid.Column="0"
+                                           FontSize="12"
+                                           TextColor="{StaticResource TextSecondary}">
+                                        <Label.FormattedText>
+                                            <FormattedString>
+                                                <Span Text="Type: " FontAttributes="Bold"/>
+                                                <Span Text="{Binding Type}"/>
+                                            </FormattedString>
+                                        </Label.FormattedText>
+                                    </Label>
+
+                                    <Label Grid.Column="1"
+                                           FontSize="12"
+                                           TextColor="{StaticResource TextSecondary}">
+                                        <Label.FormattedText>
+                                            <FormattedString>
+                                                <Span Text="Parts: " FontAttributes="Bold"/>
+                                                <Span Text="{Binding OccupiedCount}"/>
+                                                <Span Text="/"/>
+                                                <Span Text="{Binding TotalCompartments}"/>
+                                            </FormattedString>
+                                        </Label.FormattedText>
+                                    </Label>
+
+                                    <Label Grid.Column="2"
+                                           Text="✓"
+                                           TextColor="{StaticResource Success}"
+                                           FontSize="16"
+                                           IsVisible="{Binding IsSelected}"/>
+                                </Grid>
+                            </VerticalStackLayout>
+                        </Grid>
+
+                        <Frame.GestureRecognizers>
+                            <TapGestureRecognizer 
+                                Command="{Binding Source={RelativeSource AncestorType={x:Type ContentPage}}, Path=BindingContext.ToggleSelectionCommand}"
+                                CommandParameter="{Binding}"/>
+                        </Frame.GestureRecognizers>
+                    </Frame>
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+
+            <!-- Empty View -->
+            <CollectionView.EmptyView>
+                <VerticalStackLayout Padding="20" 
+                                     VerticalOptions="Center"
+                                     HorizontalOptions="Center"
+                                     Spacing="10">
+                    <Label Text="📦"
+                           FontSize="48"
+                           HorizontalOptions="Center"/>
+                    <Label Text="No boxes available"
+                           TextColor="{StaticResource TextSecondary}"
+                           HorizontalOptions="Center"
+                           FontSize="16"/>
+                    <Label Text="Create a box first to export data"
+                           TextColor="{StaticResource TextMuted}"
+                           HorizontalOptions="Center"
+                           FontSize="12"/>
+                </VerticalStackLayout>
+            </CollectionView.EmptyView>
+        </CollectionView>
+
+        <!-- Selection Summary -->
+        <Frame Grid.Row="2"
+               BackgroundColor="{StaticResource Surface}"
+               BorderColor="Transparent"
+               Padding="15"
+               Margin="10,0,10,10">
+            <Grid ColumnDefinitions="*,Auto">
+                <Label Grid.Column="0" VerticalOptions="Center">
+                    <Label.FormattedText>
+                        <FormattedString>
+                            <Span Text="{Binding SelectedCount}"
+                                  TextColor="{StaticResource Success}"
+                                  FontFamily="UbuntuMono"
+                                  FontSize="18"
+                                  FontAttributes="Bold"/>
+                            <Span Text=" of "
+                                  TextColor="{StaticResource TextSecondary}"
+                                  FontSize="14"/>
+                            <Span Text="{Binding TotalCount}"
+                                  TextColor="{StaticResource TextPrimary}"
+                                  FontFamily="UbuntuMono"
+                                  FontSize="16"/>
+                            <Span Text=" boxes selected"
+                                  TextColor="{StaticResource TextSecondary}"
+                                  FontSize="14"/>
+                        </FormattedString>
+                    </Label.FormattedText>
+                </Label>
+
+                <Button Grid.Column="1"
+                        Text="Select All"
+                        BackgroundColor="{StaticResource Primary}"
+                        TextColor="{StaticResource White}"
+                        Command="{Binding SelectAllCommand}"
+                        Padding="10,5"
+                        HeightRequest="35"/>
+            </Grid>
+        </Frame>
+
+        <!-- Action Buttons -->
+        <Grid Grid.Row="3" 
+              ColumnDefinitions="*,*"
+              ColumnSpacing="15"
+              Margin="10,0,10,20">
+            <Button Grid.Column="0"
+                    Text="Cancel"
+                    BackgroundColor="{StaticResource Gray600}"
+                    TextColor="{StaticResource White}"
+                    Command="{Binding CancelCommand}"/>
+
+            <Button Grid.Column="1"
+                    Text="Export Selected"
+                    BackgroundColor="{StaticResource Success}"
+                    TextColor="{StaticResource BackgroundDark}"
+                    Command="{Binding ExportCommand}"
+                    FontAttributes="Bold"
+                    IsEnabled="{Binding HasSelection}"/>
+        </Grid>
+
+        <!-- Loading Indicator -->
+        <Grid Grid.RowSpan="4"
+              IsVisible="{Binding IsBusy}"
+              BackgroundColor="#80000000">
+            <Frame BackgroundColor="{StaticResource Surface}"
+                   VerticalOptions="Center"
+                   HorizontalOptions="Center"
+                   Padding="30"
+                   CornerRadius="10">
+                <VerticalStackLayout Spacing="15">
+                    <ActivityIndicator IsRunning="True"
+                                      Color="{StaticResource Primary}"
+                                      WidthRequest="50"
+                                      HeightRequest="50"/>
+                    <Label Text="{Binding StatusMessage}"
+                           TextColor="{StaticResource TextPrimary}"
+                           HorizontalOptions="Center"/>
+                </VerticalStackLayout>
+            </Frame>
+        </Grid>
+    </Grid>
+</ContentPage>

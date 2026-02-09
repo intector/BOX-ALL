@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<Shell
+    x:Class="BOX_ALL.AppShell"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:views="clr-namespace:BOX_ALL.Views"
+    Title="BOX-ALL"
+    FlyoutBehavior="Flyout"
+    FlyoutBackgroundColor="{StaticResource Surface}"
+    FlyoutWidth="280">
+
+    <!-- Custom Flyout Header -->
+    <Shell.FlyoutHeader>
+        <Grid BackgroundColor="{StaticResource Primary}" 
+              HeightRequest="80" 
+              Padding="10">
+            <VerticalStackLayout VerticalOptions="Center" Spacing="1">
+                <Label Text="BOX-ALL" 
+                       TextColor="{StaticResource Gray900}" 
+                       FontSize="28" 
+                       FontFamily="StencilFont"/>
+                <Label Text="Component Inventory Manager" 
+                       TextColor="{StaticResource Gray900}" 
+                       FontSize="16"
+                       Opacity="1.0"/>
+            </VerticalStackLayout>
+        </Grid>
+    </Shell.FlyoutHeader>
+
+    <!-- Main Dashboard -->
+    <FlyoutItem Title="Dashboard">
+        <ShellContent
+            Title="Dashboard"
+            ContentTemplate="{DataTemplate views:DashboardPage}"
+            Route="DashboardPage" />
+    </FlyoutItem>
+
+    <!-- Separator -->
+    <MenuItem Text="────────────────────"
+              IsEnabled="False"/>
+
+    <!-- Box Management -->
+    <MenuItem Text="Create Box"
+              Command="{Binding CreateBoxCommand}"/>
+
+    <MenuItem Text="Delete Box"
+              Command="{Binding DeleteBoxCommand}"/>
+
+    <!-- Separator -->
+    <MenuItem Text="────────────────────"
+              IsEnabled="False"/>
+
+    <!-- Import & Sync -->
+    <MenuItem Text="Import Parts"
+              Command="{Binding ImportPartsCommand}"/>
+
+    <MenuItem Text="Synchronize"
+              Command="{Binding SynchronizeCommand}"/>
+
+    <!-- Separator -->
+    <MenuItem Text="────────────────────"
+              IsEnabled="False"/>
+
+    <!-- Data Management -->
+    <MenuItem Text="Export Data"
+              Command="{Binding ExportCommand}"/>
+
+    <MenuItem Text="Import Data"
+              Command="{Binding ImportCommand}"/>
+
+    <!-- Separator -->
+    <MenuItem Text="────────────────────"
+              IsEnabled="False"/>
+
+    <!-- App Info -->
+    <MenuItem Text="Settings"
+              Command="{Binding SettingsCommand}"/>
+
+    <MenuItem Text="About"
+              Command="{Binding AboutCommand}"/>
+
+    <!-- Footer -->
+    <Shell.FlyoutFooter>
+        <Grid BackgroundColor="{StaticResource SurfaceLight}" 
+              Padding="15"
+              HeightRequest="60">
+            <VerticalStackLayout VerticalOptions="Center" Spacing="2">
+                <Label Text="Version 1.0" 
+                       TextColor="{StaticResource TextMuted}" 
+                       FontSize="11"
+                       HorizontalOptions="Center"/>
+                <Label Text="© 2024 INTECTOR" 
+                       TextColor="{StaticResource TextMuted}" 
+                       FontSize="10"
+                       HorizontalOptions="Center"/>
+            </VerticalStackLayout>
+        </Grid>
+    </Shell.FlyoutFooter>
+
+    <!-- Custom Flyout Item Template for consistent styling -->
+    <Shell.ItemTemplate>
+        <DataTemplate>
+            <Grid Padding="20,12" BackgroundColor="Transparent">
+                <Label Text="{Binding Title}"
+                       TextColor="{StaticResource TextPrimary}"
+                       FontSize="16"
+                       FontFamily="UbuntuRegular"
+                       VerticalOptions="Center"/>
+            </Grid>
+        </DataTemplate>
+    </Shell.ItemTemplate>
+
+    <!-- Custom Menu Item Template -->
+    <Shell.MenuItemTemplate>
+        <DataTemplate>
+            <Grid Padding="20,12" BackgroundColor="Transparent">
+                <Label Text="{Binding Text}"
+                       TextColor="{StaticResource TextPrimary}"
+                       FontSize="15"
+                       FontFamily="UbuntuRegular"
+                       VerticalOptions="Center"/>
+            </Grid>
+        </DataTemplate>
+    </Shell.MenuItemTemplate>
+
+</Shell>

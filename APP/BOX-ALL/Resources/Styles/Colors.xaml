@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<?xaml-comp compile="true" ?>
+<ResourceDictionary 
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml">
+
+    <!-- Note: For Android please see also Platforms\Android\Resources\values\colors.xml -->
+
+    <!-- Core Theme Colors -->
+    <Color x:Key="Primary">#4A9EFF</Color>
+    <!-- Primary Blue -->
+    <Color x:Key="PrimaryDark">#2E7FDB</Color>
+    <!-- Darker shade for pressed states -->
+    <Color x:Key="PrimaryLight">#7AB8FF</Color>
+    <!-- Lighter shade -->
+    <Color x:Key="Secondary">#00D4FF</Color>
+    <!-- Cyan Accent -->
+    <Color x:Key="Tertiary">#1C2141</Color>
+    <!-- Surface color as tertiary -->
+
+    <!-- Background Colors -->
+    <Color x:Key="BackgroundDark">#0A0E27</Color>
+    <!-- Main dark background -->
+    <Color x:Key="Surface">#1C2141</Color>
+    <!-- Cards/Elevated surfaces -->
+    <Color x:Key="SurfaceLight">#2A3050</Color>
+    <!-- Higher elevation -->
+
+    <!-- Component State Colors -->
+    <Color x:Key="ComponentOccupied">#4ADE80</Color>
+    <!-- Green -->
+    <Color x:Key="ComponentLowStock">#FBBF24</Color>
+    <!-- Amber -->
+    <Color x:Key="ComponentOutOfStock">#FF6B6B</Color>
+    <!-- Red - quantity == 0 -->
+    <Color x:Key="ComponentEmpty">#2A3050</Color>
+    <!-- Empty compartments -->
+    <Color x:Key="ComponentSelected">#4A9EFF</Color>
+    <!-- Selected state -->
+
+    <!-- Status Colors -->
+    <Color x:Key="Success">#4ADE80</Color>
+    <Color x:Key="Warning">#FBBF24</Color>
+    <Color x:Key="Error">#FF6B6B</Color>
+    <Color x:Key="Info">#4A9EFF</Color>
+
+    <!-- Text Colors -->
+    <Color x:Key="TextPrimary">#FFFFFF</Color>
+    <Color x:Key="TextSecondary">#94A3B8</Color>
+    <Color x:Key="TextMuted">#64748B</Color>
+    <Color x:Key="TextDisabled">#475569</Color>
+
+    <!-- Standard Colors -->
+    <Color x:Key="White">#FFFFFF</Color>
+    <Color x:Key="Black">#000000</Color>
+    <Color x:Key="Transparent">Transparent</Color>
+
+    <!-- Gray Scale (adjusted for dark theme) -->
+    <Color x:Key="Gray100">#F1F5F9</Color>
+    <Color x:Key="Gray200">#E2E8F0</Color>
+    <Color x:Key="Gray300">#CBD5E1</Color>
+    <Color x:Key="Gray400">#94A3B8</Color>
+    <Color x:Key="Gray500">#64748B</Color>
+    <Color x:Key="Gray600">#475569</Color>
+    <Color x:Key="Gray700">#334155</Color>
+    <Color x:Key="Gray800">#1E293B</Color>
+    <Color x:Key="Gray900">#0F172A</Color>
+    <Color x:Key="Gray950">#0A0E27</Color>
+
+    <!-- Brushes -->
+    <SolidColorBrush x:Key="PrimaryBrush" Color="{StaticResource Primary}"/>
+    <SolidColorBrush x:Key="SecondaryBrush" Color="{StaticResource Secondary}"/>
+    <SolidColorBrush x:Key="TertiaryBrush" Color="{StaticResource Tertiary}"/>
+    <SolidColorBrush x:Key="BackgroundBrush" Color="{StaticResource BackgroundDark}"/>
+    <SolidColorBrush x:Key="SurfaceBrush" Color="{StaticResource Surface}"/>
+
+    <SolidColorBrush x:Key="SuccessBrush" Color="{StaticResource Success}"/>
+    <SolidColorBrush x:Key="WarningBrush" Color="{StaticResource Warning}"/>
+    <SolidColorBrush x:Key="ErrorBrush" Color="{StaticResource Error}"/>
+
+    <SolidColorBrush x:Key="WhiteBrush" Color="{StaticResource White}"/>
+    <SolidColorBrush x:Key="BlackBrush" Color="{StaticResource Black}"/>
+
+    <SolidColorBrush x:Key="Gray100Brush" Color="{StaticResource Gray100}"/>
+    <SolidColorBrush x:Key="Gray200Brush" Color="{StaticResource Gray200}"/>
+    <SolidColorBrush x:Key="Gray300Brush" Color="{StaticResource Gray300}"/>
+    <SolidColorBrush x:Key="Gray400Brush" Color="{StaticResource Gray400}"/>
+    <SolidColorBrush x:Key="Gray500Brush" Color="{StaticResource Gray500}"/>
+    <SolidColorBrush x:Key="Gray600Brush" Color="{StaticResource Gray600}"/>
+    <SolidColorBrush x:Key="Gray900Brush" Color="{StaticResource Gray900}"/>
+    <SolidColorBrush x:Key="Gray950Brush" Color="{StaticResource Gray950}"/>
+</ResourceDictionary>
+    

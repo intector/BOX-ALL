@@ -1,0 +1,184 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="BOX_ALL.Views.BulkImportPage"
+             Title="{Binding PageTitle}"
+             BackgroundColor="{StaticResource BackgroundDark}">
+
+    <Grid RowDefinitions="Auto,*,Auto">
+
+        <!-- Header: Status + Counts -->
+        <VerticalStackLayout Grid.Row="0" Padding="16,12" Spacing="8">
+
+            <!-- Status message -->
+            <Label Text="{Binding StatusMessage}"
+                   TextColor="#94A3B8"
+                   FontSize="13"
+                   IsVisible="{Binding HasRows}"/>
+
+            <!-- Count badges -->
+            <FlexLayout Direction="Row" Wrap="Wrap" JustifyContent="Start"
+                        IsVisible="{Binding HasRows}">
+                <Border Background="#1C3A2A" StrokeThickness="0"
+                        StrokeShape="RoundRectangle 12" Padding="8,4" Margin="0,0,8,4">
+                    <Label TextColor="#10B981" FontSize="12">
+                        <Label.FormattedText>
+                            <FormattedString>
+                                <Span Text="✅ Ready: "/>
+                                <Span Text="{Binding ReadyCount}"/>
+                            </FormattedString>
+                        </Label.FormattedText>
+                    </Label>
+                </Border>
+
+                <Border Background="#3A2A0A" StrokeThickness="0"
+                        StrokeShape="RoundRectangle 12" Padding="8,4" Margin="0,0,8,4"
+                        IsVisible="{Binding ConflictCount, Converter={StaticResource IntToBoolConverter}}">
+                    <Label TextColor="#F59E0B" FontSize="12">
+                        <Label.FormattedText>
+                            <FormattedString>
+                                <Span Text="⚠️ Conflicts: "/>
+                                <Span Text="{Binding ConflictCount}"/>
+                            </FormattedString>
+                        </Label.FormattedText>
+                    </Label>
+                </Border>
+
+                <Border Background="#1C2141" StrokeThickness="0"
+                        StrokeShape="RoundRectangle 12" Padding="8,4" Margin="0,0,8,4"
+                        IsVisible="{Binding SkipCount, Converter={StaticResource IntToBoolConverter}}">
+                    <Label TextColor="#64748B" FontSize="12">
+                        <Label.FormattedText>
+                            <FormattedString>
+                                <Span Text="⏭️ Skip: "/>
+                                <Span Text="{Binding SkipCount}"/>
+                            </FormattedString>
+                        </Label.FormattedText>
+                    </Label>
+                </Border>
+
+                <Border Background="#3A1C1C" StrokeThickness="0"
+                        StrokeShape="RoundRectangle 12" Padding="8,4" Margin="0,0,8,4"
+                        IsVisible="{Binding ErrorCount, Converter={StaticResource IntToBoolConverter}}">
+                    <Label TextColor="#EF4444" FontSize="12">
+                        <Label.FormattedText>
+                            <FormattedString>
+                                <Span Text="❌ Errors: "/>
+                                <Span Text="{Binding ErrorCount}"/>
+                            </FormattedString>
+                        </Label.FormattedText>
+                    </Label>
+                </Border>
+            </FlexLayout>
+
+            <!-- Summary (after import) -->
+            <Border Background="#1C3A2A" StrokeThickness="0"
+                    StrokeShape="RoundRectangle 8" Padding="12"
+                    IsVisible="{Binding ShowSummary}">
+                <Label Text="{Binding SummaryText}"
+                       TextColor="#10B981" FontSize="14"/>
+            </Border>
+
+        </VerticalStackLayout>
+
+        <!-- Row List -->
+        <CollectionView Grid.Row="1"
+                        ItemsSource="{Binding Rows}"
+                        Margin="0">
+            <CollectionView.ItemTemplate>
+                <DataTemplate>
+                    <Border Background="#1C2141"
+                            StrokeThickness="0"
+                            StrokeShape="RoundRectangle 6"
+                            Padding="12,8"
+                            Margin="16,2">
+                        <Grid ColumnDefinitions="*,Auto" RowDefinitions="Auto,Auto,Auto">
+
+                            <!-- Part number + Description -->
+                            <Label Grid.Row="0" Grid.Column="0"
+                                   Text="{Binding PartNumber}"
+                                   TextColor="White"
+                                   FontSize="14"
+                                   FontAttributes="Bold"
+                                   LineBreakMode="TailTruncation"/>
+
+                            <!-- Position badge -->
+                            <Border Grid.Row="0" Grid.Column="1"
+                                    Background="#0A0E27"
+                                    StrokeThickness="0"
+                                    StrokeShape="RoundRectangle 4"
+                                    Padding="6,2"
+                                    VerticalOptions="Center">
+                                <Label FontSize="12" TextColor="#94A3B8" FontFamily="UbuntuMono">
+                                    <Label.FormattedText>
+                                        <FormattedString>
+                                            <Span Text="{Binding BoxName}"/>
+                                            <Span Text=":"/>
+                                            <Span Text="{Binding Position}"/>
+                                        </FormattedString>
+                                    </Label.FormattedText>
+                                </Label>
+                            </Border>
+
+                            <!-- Description -->
+                            <Label Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2"
+                                   Text="{Binding Description}"
+                                   TextColor="#64748B"
+                                   FontSize="11"
+                                   LineBreakMode="TailTruncation"
+                                   MaxLines="1"/>
+
+                            <!-- Status -->
+                            <Label Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="2"
+                                   Text="{Binding StatusText}"
+                                   TextColor="{Binding StatusColor}"
+                                   FontSize="12"
+                                   Margin="0,2,0,0"/>
+                        </Grid>
+                    </Border>
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+
+            <CollectionView.EmptyView>
+                <VerticalStackLayout VerticalOptions="Center" HorizontalOptions="Center" Padding="20">
+                    <Label Text="No rows found in CSV"
+                           TextColor="#64748B" FontSize="16"
+                           HorizontalOptions="Center"/>
+                </VerticalStackLayout>
+            </CollectionView.EmptyView>
+        </CollectionView>
+
+        <!-- Bottom Buttons -->
+        <Grid Grid.Row="2" ColumnDefinitions="*,*"
+              Padding="16,12" ColumnSpacing="12">
+
+            <Button Grid.Column="0"
+                    Text="Cancel"
+                    Command="{Binding GoBackCommand}"
+                    BackgroundColor="#374151"
+                    TextColor="White"
+                    FontSize="14"/>
+
+            <Button Grid.Column="1"
+                    Text="{Binding ReadyCount, StringFormat='Import {0} Ready'}"
+                    Command="{Binding ImportAllCommand}"
+                    BackgroundColor="#10B981"
+                    TextColor="White"
+                    FontSize="14"
+                    IsEnabled="{Binding CanImport}"
+                    IsVisible="{Binding CanImport}"/>
+        </Grid>
+
+        <!-- Busy Overlay -->
+        <Grid Grid.RowSpan="3"
+              BackgroundColor="#CC0A0E27"
+              IsVisible="{Binding IsBusy}">
+            <VerticalStackLayout VerticalOptions="Center" HorizontalOptions="Center">
+                <ActivityIndicator IsRunning="{Binding IsBusy}" Color="#4A9EFF"/>
+                <Label Text="{Binding StatusMessage}" TextColor="White" FontSize="14"
+                       HorizontalOptions="Center" Margin="0,8,0,0"/>
+            </VerticalStackLayout>
+        </Grid>
+    </Grid>
+
+</ContentPage>

@@ -1,0 +1,333 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="BOX_ALL.Views.ComponentDetailsPage"
+             Title="Component Details"
+             BackgroundColor="{StaticResource BackgroundDark}">
+
+    <Grid>
+        <ScrollView>
+            <VerticalStackLayout Padding="20" Spacing="15">
+
+                <!-- Component Header -->
+                <Frame BackgroundColor="{StaticResource Surface}"
+                       BorderColor="Transparent"
+                       Padding="15">
+                    <VerticalStackLayout Spacing="10">
+                        <Label Text="{Binding Component.PartNumber}"
+                               Style="{StaticResource PageTitle}"
+                               FontFamily="UbuntuMono"
+                               HorizontalOptions="Center"/>
+
+                        <Label Text="{Binding Component.Description}"
+                               Style="{StaticResource SubHeadline}"
+                               HorizontalOptions="Center"
+                               HorizontalTextAlignment="Center"/>
+                    </VerticalStackLayout>
+                </Frame>
+
+                <!-- Location & Stock Info -->
+                <Frame BackgroundColor="{StaticResource Surface}"
+                       BorderColor="Transparent"
+                       Padding="15">
+                    <Grid ColumnDefinitions="*,*,*" RowSpacing="15">
+                        <!-- Position -->
+                        <VerticalStackLayout Grid.Column="0" HorizontalOptions="Center">
+                            <Frame BackgroundColor="{StaticResource Primary}"
+                                   CornerRadius="25"
+                                   WidthRequest="50"
+                                   HeightRequest="50"
+                                   Padding="0"
+                                   HorizontalOptions="Center">
+                                <Label Text="{Binding Location.Position}"
+                                       TextColor="{StaticResource BackgroundDark}"
+                                       FontFamily="UbuntuMono"
+                                       FontAttributes="Bold"
+                                       FontSize="16"
+                                       HorizontalOptions="Center"
+                                       VerticalOptions="Center"/>
+                            </Frame>
+                            <Label Text="Position"
+                                   TextColor="{StaticResource TextSecondary}"
+                                   FontSize="12"
+                                   HorizontalOptions="Center"
+                                   Margin="0,5,0,0"/>
+                        </VerticalStackLayout>
+
+                        <!-- Quantity -->
+                        <VerticalStackLayout Grid.Column="1" HorizontalOptions="Center">
+                            <Frame BackgroundColor="{Binding StockStatusColor}"
+                                   CornerRadius="25"
+                                   WidthRequest="50"
+                                   HeightRequest="50"
+                                   Padding="0"
+                                   HorizontalOptions="Center">
+                                <Label Text="{Binding Location.Quantity}"
+                                       TextColor="{StaticResource BackgroundDark}"
+                                       FontFamily="UbuntuMono"
+                                       FontAttributes="Bold"
+                                       FontSize="20"
+                                       HorizontalOptions="Center"
+                                       VerticalOptions="Center"/>
+                            </Frame>
+                            <Label Text="Quantity"
+                                   TextColor="{StaticResource TextSecondary}"
+                                   FontSize="12"
+                                   HorizontalOptions="Center"
+                                   Margin="0,5,0,0"/>
+                        </VerticalStackLayout>
+
+                        <!-- Min Stock -->
+                        <VerticalStackLayout Grid.Column="2" HorizontalOptions="Center">
+                            <Frame BackgroundColor="{StaticResource SurfaceLight}"
+                                   CornerRadius="25"
+                                   WidthRequest="50"
+                                   HeightRequest="50"
+                                   Padding="0"
+                                   HorizontalOptions="Center">
+                                <Label Text="{Binding Location.MinQuantity}"
+                                       TextColor="{StaticResource TextPrimary}"
+                                       FontFamily="UbuntuMono"
+                                       FontSize="16"
+                                       HorizontalOptions="Center"
+                                       VerticalOptions="Center"/>
+                            </Frame>
+                            <Label Text="Min Stock"
+                                   TextColor="{StaticResource TextSecondary}"
+                                   FontSize="12"
+                                   HorizontalOptions="Center"
+                                   Margin="0,5,0,0"/>
+                        </VerticalStackLayout>
+                    </Grid>
+                </Frame>
+
+                <!-- Component Information -->
+                <Frame BackgroundColor="{StaticResource Surface}"
+                       BorderColor="Transparent"
+                       Padding="15">
+                    <VerticalStackLayout Spacing="10">
+                        <Label Text="Component Information"
+                               Style="{StaticResource SectionTitle}"/>
+
+                        <Grid ColumnDefinitions="120,*" RowDefinitions="Auto,Auto,Auto,Auto" RowSpacing="8">
+                            <!-- Manufacturer -->
+                            <Label Grid.Row="0" Grid.Column="0"
+                                   Text="Manufacturer:"
+                                   TextColor="{StaticResource TextSecondary}"
+                                   FontSize="13"/>
+                            <Label Grid.Row="0" Grid.Column="1"
+                                   Text="{Binding Component.Manufacturer}"
+                                   TextColor="{StaticResource TextPrimary}"
+                                   FontSize="13"/>
+
+                            <!-- Category -->
+                            <Label Grid.Row="1" Grid.Column="0"
+                                   Text="Category:"
+                                   TextColor="{StaticResource TextSecondary}"
+                                   FontSize="13"/>
+                            <Label Grid.Row="1" Grid.Column="1"
+                                   Text="{Binding Component.Category}"
+                                   TextColor="{StaticResource TextPrimary}"
+                                   FontSize="13"/>
+
+                            <!-- Supplier -->
+                            <Label Grid.Row="2" Grid.Column="0"
+                                   Text="Supplier:"
+                                   TextColor="{StaticResource TextSecondary}"
+                                   FontSize="13"
+                                   IsVisible="{Binding HasSupplierInfo}"/>
+                            <Label Grid.Row="2" Grid.Column="1"
+                                   Text="{Binding Supplier}"
+                                   TextColor="{StaticResource TextPrimary}"
+                                   FontSize="13"
+                                   IsVisible="{Binding HasSupplierInfo}"/>
+
+                            <!-- Supplier Part # -->
+                            <Label Grid.Row="3" Grid.Column="0"
+                                   Text="Supplier Part #:"
+                                   TextColor="{StaticResource TextSecondary}"
+                                   FontSize="13"
+                                   IsVisible="{Binding HasSupplierPartNumber}"/>
+                            <Label Grid.Row="3" Grid.Column="1"
+                                   Text="{Binding Component.SupplierPartNumber}"
+                                   TextColor="{StaticResource TextPrimary}"
+                                   FontFamily="UbuntuMono"
+                                   FontSize="13"
+                                   IsVisible="{Binding HasSupplierPartNumber}"/>
+                        </Grid>
+                    </VerticalStackLayout>
+                </Frame>
+
+                <!-- Technical Specifications -->
+                <Frame BackgroundColor="{StaticResource Surface}"
+                       BorderColor="Transparent"
+                       Padding="15"
+                       IsVisible="{Binding HasTechnicalSpecs}">
+                    <VerticalStackLayout Spacing="10">
+                        <Label Text="Technical Specifications"
+                               Style="{StaticResource SectionTitle}"/>
+
+                        <Grid ColumnDefinitions="120,*" RowDefinitions="Auto,Auto,Auto,Auto" RowSpacing="8">
+                            <!-- Value -->
+                            <Label Grid.Row="0" Grid.Column="0"
+                                   Text="Value:"
+                                   TextColor="{StaticResource TextSecondary}"
+                                   FontSize="13"
+                                   IsVisible="{Binding HasValue}"/>
+                            <Label Grid.Row="0" Grid.Column="1"
+                                   Text="{Binding Component.Value}"
+                                   TextColor="{StaticResource TextPrimary}"
+                                   FontFamily="UbuntuMono"
+                                   FontSize="13"
+                                   IsVisible="{Binding HasValue}"/>
+
+                            <!-- Package -->
+                            <Label Grid.Row="1" Grid.Column="0"
+                                   Text="Package:"
+                                   TextColor="{StaticResource TextSecondary}"
+                                   FontSize="13"
+                                   IsVisible="{Binding HasPackage}"/>
+                            <Label Grid.Row="1" Grid.Column="1"
+                                   Text="{Binding Component.Package}"
+                                   TextColor="{StaticResource TextPrimary}"
+                                   FontSize="13"
+                                   IsVisible="{Binding HasPackage}"/>
+
+                            <!-- Tolerance -->
+                            <Label Grid.Row="2" Grid.Column="0"
+                                   Text="Tolerance:"
+                                   TextColor="{StaticResource TextSecondary}"
+                                   FontSize="13"
+                                   IsVisible="{Binding HasTolerance}"/>
+                            <Label Grid.Row="2" Grid.Column="1"
+                                   Text="{Binding Component.Tolerance}"
+                                   TextColor="{StaticResource TextPrimary}"
+                                   FontSize="13"
+                                   IsVisible="{Binding HasTolerance}"/>
+
+                            <!-- Voltage -->
+                            <Label Grid.Row="3" Grid.Column="0"
+                                   Text="Voltage:"
+                                   TextColor="{StaticResource TextSecondary}"
+                                   FontSize="13"
+                                   IsVisible="{Binding HasVoltage}"/>
+                            <Label Grid.Row="3" Grid.Column="1"
+                                   Text="{Binding Component.Voltage}"
+                                   TextColor="{StaticResource TextPrimary}"
+                                   FontSize="13"
+                                   IsVisible="{Binding HasVoltage}"/>
+                        </Grid>
+                    </VerticalStackLayout>
+                </Frame>
+
+                <!-- Notes -->
+                <Frame BackgroundColor="{StaticResource Surface}"
+                       BorderColor="Transparent"
+                       Padding="15"
+                       IsVisible="{Binding HasNotes}">
+                    <VerticalStackLayout Spacing="10">
+                        <Label Text="Notes"
+                               Style="{StaticResource SectionTitle}"/>
+                        <Label Text="{Binding Component.Notes}"
+                               TextColor="{StaticResource TextPrimary}"
+                               FontSize="13"/>
+                    </VerticalStackLayout>
+                </Frame>
+
+                <!-- Action Buttons -->
+                <Grid ColumnDefinitions="*,*,*" ColumnSpacing="10" Margin="0,10">
+                    <Button Grid.Column="0"
+                            Text="Edit"
+                            BackgroundColor="{StaticResource Primary}"
+                            TextColor="{StaticResource White}"
+                            Command="{Binding EditCommand}">
+                        <Button.ImageSource>
+                            <FontImageSource Glyph="✏️" 
+                                            Color="White" 
+                                            Size="16"/>
+                        </Button.ImageSource>
+                    </Button>
+
+                    <Button Grid.Column="1"
+                            Text="Relocate"
+                            BackgroundColor="{StaticResource Secondary}"
+                            TextColor="{StaticResource BackgroundDark}"
+                            Command="{Binding RelocateCommand}">
+                        <Button.ImageSource>
+                            <FontImageSource Glyph="📦" 
+                                            Color="{StaticResource BackgroundDark}" 
+                                            Size="16"/>
+                        </Button.ImageSource>
+                    </Button>
+
+                    <Button Grid.Column="2"
+                            Text="Delete"
+                            BackgroundColor="{StaticResource Error}"
+                            TextColor="{StaticResource White}"
+                            Command="{Binding DeleteCommand}">
+                        <Button.ImageSource>
+                            <FontImageSource Glyph="🗑️" 
+                                            Color="White" 
+                                            Size="16"/>
+                        </Button.ImageSource>
+                    </Button>
+                </Grid>
+
+                <!-- Quick Stock Adjustment -->
+                <Frame BackgroundColor="{StaticResource Surface}"
+                       BorderColor="Transparent"
+                       Padding="15">
+                    <VerticalStackLayout Spacing="10">
+                        <Label Text="Quick Stock Adjustment"
+                               Style="{StaticResource SectionTitle}"/>
+
+                        <Grid ColumnDefinitions="Auto,*,Auto" ColumnSpacing="15">
+                            <Button Grid.Column="0"
+                                    Text="-"
+                                    WidthRequest="50"
+                                    HeightRequest="50"
+                                    BackgroundColor="{StaticResource Error}"
+                                    TextColor="{StaticResource White}"
+                                    FontSize="24"
+                                    FontAttributes="Bold"
+                                    Command="{Binding DecrementQuantityCommand}"/>
+
+                            <Entry Grid.Column="1"
+                                   Text="{Binding AdjustmentQuantity}"
+                                   Keyboard="Numeric"
+                                   HorizontalTextAlignment="Center"
+                                   FontSize="20"
+                                   FontFamily="UbuntuMono"
+                                   BackgroundColor="{StaticResource SurfaceLight}"
+                                   TextColor="{StaticResource TextPrimary}"/>
+
+                            <Button Grid.Column="2"
+                                    Text="+"
+                                    WidthRequest="50"
+                                    HeightRequest="50"
+                                    BackgroundColor="{StaticResource Success}"
+                                    TextColor="{StaticResource BackgroundDark}"
+                                    FontSize="24"
+                                    FontAttributes="Bold"
+                                    Command="{Binding IncrementQuantityCommand}"/>
+                        </Grid>
+
+                        <Button Text="Update Quantity"
+                                BackgroundColor="{StaticResource Primary}"
+                                TextColor="{StaticResource White}"
+                                Command="{Binding UpdateQuantityCommand}"
+                                Margin="0,10,0,0"/>
+                    </VerticalStackLayout>
+                </Frame>
+
+            </VerticalStackLayout>
+        </ScrollView>
+
+        <!-- Loading Indicator -->
+        <ActivityIndicator IsRunning="{Binding IsBusy}"
+                           IsVisible="{Binding IsBusy}"
+                           Color="{StaticResource Primary}"
+                           VerticalOptions="Center"
+                           HorizontalOptions="Center"/>
+    </Grid>
+</ContentPage>

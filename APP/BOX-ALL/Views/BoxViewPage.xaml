@@ -1,0 +1,133 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="BOX_ALL.Views.BoxViewPage"
+             Title="Storage Box"
+             BackgroundColor="{StaticResource BackgroundDark}">
+
+    <Grid Padding="10">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+
+        <!-- Header -->
+        <Frame Grid.Row="0" 
+               BackgroundColor="{StaticResource Surface}"
+               BorderColor="Transparent"
+               Padding="10"
+               Margin="0,0,0,10">
+            <Grid ColumnDefinitions="*,Auto">
+                <!-- Box Name Label (double-tap to edit) -->
+                <Label Grid.Column="0"
+                       Text="{Binding CurrentBox.Name}"
+                       Style="{StaticResource SectionTitle}"
+                       VerticalOptions="Center"
+                       IsVisible="{Binding IsEditingName, Converter={StaticResource InvertedBoolConverter}}">
+                    <Label.GestureRecognizers>
+                        <TapGestureRecognizer NumberOfTapsRequired="2" 
+                                              Tapped="OnBoxNameDoubleTapped"/>
+                    </Label.GestureRecognizers>
+                </Label>
+
+                <!-- Inline Rename Entry (shown during edit) -->
+                <Entry Grid.Column="0"
+                       x:Name="BoxNameEntry"
+                       Text="{Binding EditBoxName}"
+                       IsVisible="{Binding IsEditingName}"
+                       TextColor="{StaticResource TextPrimary}"
+                       BackgroundColor="{StaticResource BackgroundDark}"
+                       FontSize="18"
+                       FontFamily="UbuntuRegular"
+                       VerticalOptions="Center"
+                       ReturnType="Done"
+                       Completed="OnBoxNameEntryCompleted"
+                       Unfocused="OnBoxNameEntryUnfocused"/>
+
+                <Label Grid.Column="1"
+                       VerticalOptions="Center">
+                    <Label.FormattedText>
+                        <FormattedString>
+                            <Span Text="{Binding OccupiedCount}" 
+                                  TextColor="{StaticResource Success}"
+                                  FontFamily="UbuntuMono"
+                                  FontAttributes="Bold"/>
+                            <Span Text=" / " TextColor="{StaticResource TextSecondary}"/>
+                            <Span Text="{Binding TotalCompartments}" 
+                                  TextColor="{StaticResource TextPrimary}"
+                                  FontFamily="UbuntuMono"/>
+                            <Span Text=" slots" TextColor="{StaticResource TextSecondary}"/>
+                        </FormattedString>
+                    </Label.FormattedText>
+                </Label>
+            </Grid>
+        </Frame>
+
+        <!-- Main Grid using GraphicsView -->
+        <ScrollView Grid.Row="1" 
+                    Orientation="Both"
+                    HorizontalScrollBarVisibility="Always"
+                    VerticalScrollBarVisibility="Always">
+            <Frame BackgroundColor="{StaticResource Surface}"
+                   BorderColor="Transparent"
+                   Padding="10"
+                   Margin="0">
+                <GraphicsView x:Name="GridGraphicsView"
+                              HeightRequest="588"
+                              WidthRequest="565"
+                              HorizontalOptions="Start"
+                              VerticalOptions="Start">
+                    <GraphicsView.GestureRecognizers>
+                        <TapGestureRecognizer Tapped="OnGridTapped"/>
+                    </GraphicsView.GestureRecognizers>
+                </GraphicsView>
+            </Frame>
+        </ScrollView>
+
+        <!-- Legend -->
+        <Frame Grid.Row="2" 
+               BackgroundColor="{StaticResource Surface}"
+               BorderColor="Transparent"
+               Padding="10"
+               Margin="0,10,0,0">
+            <Grid ColumnDefinitions="*,*,*,*" RowSpacing="10">
+                <HorizontalStackLayout Grid.Column="0" Spacing="5" HorizontalOptions="Center">
+                    <BoxView BackgroundColor="{StaticResource ComponentOccupied}"
+                             WidthRequest="14" HeightRequest="14" CornerRadius="2"/>
+                    <Label Text="Occupied" TextColor="{StaticResource TextPrimary}" 
+                           VerticalOptions="Center" FontSize="11"/>
+                </HorizontalStackLayout>
+
+                <HorizontalStackLayout Grid.Column="1" Spacing="5" HorizontalOptions="Center">
+                    <BoxView BackgroundColor="{StaticResource ComponentLowStock}"
+                             WidthRequest="14" HeightRequest="14" CornerRadius="2"/>
+                    <Label Text="Low Stock" TextColor="{StaticResource TextPrimary}" 
+                           VerticalOptions="Center" FontSize="11"/>
+                </HorizontalStackLayout>
+
+                <HorizontalStackLayout Grid.Column="2" Spacing="5" HorizontalOptions="Center">
+                    <BoxView BackgroundColor="{StaticResource ComponentOutOfStock}"
+                             WidthRequest="14" HeightRequest="14" CornerRadius="2"/>
+                    <Label Text="No Stock" TextColor="{StaticResource TextPrimary}" 
+                           VerticalOptions="Center" FontSize="11"/>
+                </HorizontalStackLayout>
+
+                <HorizontalStackLayout Grid.Column="3" Spacing="5" HorizontalOptions="Center">
+                    <BoxView BackgroundColor="{StaticResource ComponentEmpty}"
+                             WidthRequest="14" HeightRequest="14" CornerRadius="2"/>
+                    <Label Text="Empty" TextColor="{StaticResource TextPrimary}" 
+                           VerticalOptions="Center" FontSize="11"/>
+                </HorizontalStackLayout>
+            </Grid>
+        </Frame>
+
+        <!-- Loading Indicator -->
+        <ActivityIndicator Grid.Row="1" 
+                          IsRunning="{Binding IsBusy}"
+                          IsVisible="{Binding IsBusy}"
+                          Color="{StaticResource Primary}"
+                          VerticalOptions="Center"
+                          HorizontalOptions="Center"/>
+    </Grid>
+</ContentPage>

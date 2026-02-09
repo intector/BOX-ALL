@@ -1,0 +1,66 @@
+BoxName,Position,PartNumber,Description,Manufacturer,Category,Quantity,MinStock,Supplier,SupplierPartNumber,Value,Package,Tolerance,Voltage,UnitPrice,Notes,DatasheetUrl,SalesOrderNumber
+Blue Label Box,A-01,STM32H7B0VBT6,"ARM Microcontrollers - MCU High-performance & DSP DP-FPU, Arm Cortex-M7 MCU 128KBytes of Flash 1376 KB SRAM",,Other,10,10,Mouser,511-STM32H7B0VBT6,,,,,5.9,,,275422760
+,,FLTS22WR00,Fixed Terminal Blocks SMD TERMINAL BLOCK,,Other,25,10,Mouser,523-FLTS22WR00,,,,,0.377,,,275422760
+Blue Label Box,G-03,NTCG103JF103FT1A,"NTC Thermistors NTC,10K,1%,0402,125C,ECO",,Other,100,10,Mouser,810-NTCG103JF103FT1A,,,,,0.051,,,275422760
+Blue Label Box,B-01,SN74LVC1G3157DRYR,Analog Switch ICs SNGL Pole Double Thr ow Analog Switch,,Other,100,10,Mouser,595-74LVC1G3157DRYR,,,,,0.083,,,275422760
+Blue Label Box,B-02,SN74LVC1G125DRYR,Buffers & Line Drivers SNGL Bus Buffer Gate,,Other,100,10,Mouser,595-SN74LVC1G125DRYR,,,,,0.121,,,275422760
+Blue Label Box,B-03,SN74LVC1G04DRYR,Inverters SNGL Inverter,,Other,100,10,Mouser,595-SN74LVC1G04DRYR,,,,,0.1,,,275422760
+Blue Label Box,C-01,0685P6000-01,"Surface Mount Fuses Surface Mt Chip fuse 1206 size, 6A",,Other,10,10,Mouser,530-0685P6000-01,,,,,0.7,,,275422760
+Blue Label Box,C-02,C1T5,"Surface Mount Fuses 1206 SMT Fuse Slow Blow, 5A",,Other,10,10,Mouser,530-C1T5,,,,,0.203,,,275422760
+Blue Label Box,C-03,C1T 4,"Surface Mount Fuses 1206 SMT Fuse Slow Blow, 4A",,Other,10,10,Mouser,530-C1T4,,,,,0.229,,,275422760
+Blue Label Box,C-04,C1F 3,"Surface Mount Fuses 1206 SMT Fuse Fast Acting, 3A",,Other,10,10,Mouser,530-C1F3,,,,,0.258,,,275422760
+Blue Label Box,B-08,BAT54JFILM,Schottky Diodes & Rectifiers 300mA 40 Volt,,Other,100,10,Mouser,511-BAT54JFILM,,,,,0.073,,,275422760
+Blue Label Box,B-09,BAT54SFILM,Schottky Diodes & Rectifiers 300mA 40V VRRM 7pF -65 to 150 C,,Other,50,10,Mouser,511-BAT54SFILM,,,,,0.112,,,275422760
+,,MKP1G021503C00JSSD,Film Capacitors .015uF 400V 5% PCM10,,Other,10,10,Mouser,505-M10.015/400/5P,,,,,0.292,,,275422760
+,,MKP10-.022/400/10P10,Film Capacitors .022uF 400 Volts 10%,,Other,10,10,Mouser,505-MKP1002240010P10,,,,,0.359,,,275422760
+,,MKP10-.033/400/10P10,Film Capacitors .033uF 400 Volts 10%,,Other,10,10,Mouser,505-MKP1003340010P10,,,,,0.372,,,275422760
+Blue Label Box,A-03,MPQ6615GQKTE-AEC1-P,"Motor / Motion / Ignition Controllers & Drivers 45V, 9m? H-Bridge Motor Driver AEC-Q100 Qualified",,Other,10,10,Mouser,946-MPQ6615GQKTEP,,,,,6.64,,,275422760
+,,TLV1117LV33DCYR,LDO Voltage Regulators 1A Pos Fix Vltg LDO Linear Reg A 595-TLV1117LV33DCYT,,Other,100,10,Mouser,595-TLV1117LV33DCYR,,,,,0.115,,,275422760
+,,TSHF5410,"Infrared Emitters 890nm,T-1.75 70mW/sr,+/-22deg.",,Other,20,10,Mouser,782-TSHF5410,,,,,0.447,,,275422760
+,,SFH 203 FA,Photodiodes PHOTODIODE,,Other,20,10,Mouser,720-SFH203FA,,,,,0.548,,,275422760
+Blue Label Box,C-05,ECS-.327-12.5-12R-C-TR,Crystals 32.768kHz 12.5pF -40C +85C,,Other,30,10,Mouser,520-.327-12.5-12R-CT,,,,,0.478,,,275422760
+Blue Label Box,C-06,ECS-250-10-37B-CTN-TR,Crystals 25MHz ESR 50 10pF-40C +85C,,Other,30,10,Mouser,520-250-10-37B-CTNT,,,,,0.307,,,275422760
+Blue Label Box,C-07,0402N150J100CT,"Multilayer Ceramic Capacitors MLCC - SMD/SMT 15pF, +-5%, 10V",,Other,500,10,Mouser,791-0402N150J100CT,,,,,0.003,,,275422760
+Blue Label Box,C-08,RF15N220J100CT,Multilayer Ceramic Capacitors MLCC - SMD/SMT 22pF 5% 10V,,Other,500,10,Mouser,791-RF15N220J100CT,,,,,0.01,,,275422760
+,,APD1012101M050R,Aluminum Organic Polymer Capacitors 100UF 50V ESR=27,,Other,20,10,Mouser,581-APD1012101M050R,,,,,1.21,,,275422760
+Blue Label Box,H-01,RCS06034K30FKEA,Thick Film Resistors - SMD Thick Film Resistors - SMD,,Other,100,10,Mouser,71-RCS06034K30FKEA,,,,,0.03,,,275422760
+Blue Label Box,H-02,RK73H1JTTD4420F,Thick Film Resistors - SMD 1/10watts 442ohms 1%,,Other,100,10,Mouser,660-RK73H1JTTD4420F,,,,,0.012,,,275422760
+Blue Label Box,H-03,RK73H1JTTD1000F,Thick Film Resistors - SMD 1/8watts (0.125W) 10,,Other,100,10,Mouser,660-RK73H1JTTD1000F,,,,,0.013,,,275422760
+Blue Label Box,H-04,RCC0603100KFKEA,Thick Film Resistors - SMD 1/5W 100Kohms 1% 100ppm,,Other,100,10,Mouser,71-RCC0603100KFKEA,,,,,0.027,,,275422760
+Blue Label Box,H-05,RK73H1JTTD1912F,Thick Film Resistors - SMD 1/10watts 19.1Kohms,,Other,100,10,Mouser,660-RK73H1JTTD1912F,,,,,0.012,,,275422760
+Blue Label Box,H-06,RCS06031K00JNEA,Thick Film Resistors - SMD 0.25watt 1Kohms 5% 200ppm,,Other,100,10,Mouser,71-RCS06031K00JNEA,,,,,0.034,,,275422760
+Blue Label Box,H-07,RCS06034K70FKEA,Thick Film Resistors - SMD 0.25watt 4.7Kohms 1% 100ppm,,Other,100,10,Mouser,71-RCS06034K70FKEA,,,,,0.034,,,275422760
+Blue Label Box,H-11,CRCW040247K0JNEDHP,Thick Film Resistors - SMD 0.2W 47Kohms 5% High Power AEC-Q200,,Other,100,10,Mouser,71-CRCW040247K0JNEDH,,,,,0.025,,,275422760
+Blue Label Box,H-12,RCS04024K70FKED,Thick Film Resistors - SMD 0.2watt 4.7Kohms 1% 100ppm,,Other,100,10,Mouser,71-RCS04024K70FKED,,,,,0.028,,,275422760
+Blue Label Box,G-01,CRCW0402330RJNEDHP,Thick Film Resistors - SMD 0.2W 330ohms 5% High Power AEC-Q200,,Other,100,10,Mouser,71-CRCW0402330RJNEDH,,,,,0.027,,,275422760
+Blue Label Box,G-02,SG73P1ETTP1002F,Thick Film Resistors - SMD 0.125W 10Kohm 1% 200,,Other,200,10,Mouser,660-SG73P1ETTP1002F,,,,,0.028,,,275422760
+Blue Label Box,H-08,RCS060310K0FKEA,Thick Film Resistors - SMD 0.25watt 10Kohms 1% 100ppm,,Other,100,10,Mouser,71-RCS060310K0FKEA,,,,,0.035,,,275422760
+Blue Label Box,H-09,ERA-3VRW3301V,Thin Film Resistors - SMD 0603 0.05% 3.3Kohm 10ppm SMD,,Other,20,10,Mouser,667-ERA-3VRW3301V,,,,,0.375,,,275422760
+Blue Label Box,H-10,RCS060333R0FKEA,Thick Film Resistors - SMD 0.25watt 33ohms 1% 100ppm,,Other,100,10,Mouser,71-RCS060333R0FKEA,,,,,0.036,,,275422760
+Blue Label Box,K-04,CL10B104KB8WPND,Multilayer Ceramic Capacitors MLCC - SMD/SMT 100nF0.150V X7R 1608 0603,,Other,100,10,Mouser,187-CL10B104KB8WPND,,,,,0.024,,,275422760
+Blue Label Box,K-05,CL10B105KB8NQNC,Multilayer Ceramic Capacitors MLCC - SMD/SMT 1.0uF +/-10% 50V X7R 0603,,Other,100,10,Mouser,187-CL10B105KB8NQNC,,,,,0.035,,,275422760
+Blue Label Box,K-06,CL10B105KA8NNNL,Multilayer Ceramic Capacitors MLCC - SMD/SMT 1uF+/-10% 25V X7R 16 0603,,Other,500,10,Mouser,187-CL10B105KA8NNNL,,,,,0.015,,,275422760
+Blue Label Box,K-07,GRM188Z71C475KE21D,Multilayer Ceramic Capacitors MLCC - SMD/SMT 4.7 uF 16 VDC 10% 0603 X7R,,Other,50,10,Mouser,81-GRM188Z71C475KE1D,,,,,0.137,,,275422760
+Blue Label Box,J-01,CL32B106KBJNNNE,Multilayer Ceramic Capacitors MLCC - SMD/SMT 10uF+/-10% 50V X7R 3 1210,,Other,100,10,Mouser,187-CL32B106KBJNNNE,,,,,0.144,,,275422760
+Blue Label Box,J-06,C0805C104M5RACTU,Multilayer Ceramic Capacitors MLCC - SMD/SMT 50V 0.1uF X7R 0805 20%,,Other,200,10,Mouser,80-C0805C104M5R,,,,,0.019,,,275422760
+Blue Label Box,J-03,CL32B476KPJNNWE,Multilayer Ceramic Capacitors MLCC - SMD/SMT 47uF+/-10% 10V X7R 3 1210,,Other,40,10,Mouser,187-CL32B476KPJNNWE,,,,,0.541,,,275422760
+Blue Label Box,J-09,GRM188Z71A106KA73J,Multilayer Ceramic Capacitors MLCC - SMD/SMT 10 uF 10 VDC 10% 0603 X7R,,Other,140,10,Mouser,81-GRM188Z71A106KA3J,,,,,0.107,,,275422760
+Blue Label Box,J-10,GRM188Z71A106KA73D,Multilayer Ceramic Capacitors MLCC - SMD/SMT 10 uF 10 VDC 10% 0603 X7R,,Other,100,10,Mouser,81-GRM188Z71A106KA3D,,,,,0.107,,,275422760
+Blue Label Box,J-11,0603B104K100CT,Multilayer Ceramic Capacitors MLCC - SMD/SMT 0.10uF +-10% 10V,,Other,1000,10,Mouser,791-0603B104K100CT,,,,,0.005,,,275422760
+Blue Label Box,J-12,CL10B225KP8NNNC,Multilayer Ceramic Capacitors MLCC - SMD/SMT 2.2uF+/-10% 10V X7R 0603,,Other,500,10,Mouser,187-CL10B225KP8NNNC,,,,,0.014,,,275422760
+Blue Label Box,L-01,885012205018,Multilayer Ceramic Capacitors MLCC - SMD/SMT WCAP-CSGP 0.1uF 0402 10% 10V MLCC,,Other,500,10,Mouser,710-885012205018,,,,,0.014,,,275422760
+Blue Label Box,K-01,C0603C103K3RACTU,Multilayer Ceramic Capacitors MLCC - SMD/SMT 25V 0.01uF X7R 0603 10%,,Other,500,10,Mouser,80-C0603C103K3R,,,,,0.013,,,275422760
+Blue Label Box,L-02,C0402C102K8RACAUTO,Multilayer Ceramic Capacitors MLCC - SMD/SMT 10V 1000pF X7R 0402 10% AEC-Q200,,Other,100,10,Mouser,80-C0402C102K8RAUTO,,,,,0.023,,,275422760
+Blue Label Box,L-03,885012205003,Multilayer Ceramic Capacitors MLCC - SMD/SMT WCAP-CSGP 330pF 0402 10% 10V MLCC,,Other,100,10,Mouser,710-885012205003,,,,,0.012,,,275422760
+Blue Label Box,L-04,LMF105B7103KVHF,Multilayer Ceramic Capacitors MLCC - SMD/SMT 963-MAASL105SB7103KF RPLCMT PN 10V 0.01uF X7R 0402 AEC-Q200,,Other,500,10,Mouser,963-LMF105B7103KVHF,,,,,0.021,,,275422760
+Blue Label Box,J-04,CL32B476MPJNNNE,Multilayer Ceramic Capacitors MLCC - SMD/SMT 47uF+/-20% 10V X7R 3 1210,,Other,100,10,Mouser,187-CL32B476MPJNNNE,,,,,0.254,,,275422760
+Blue Label Box,L-05,GCM155C71A105KE38D,Multilayer Ceramic Capacitors MLCC - SMD/SMT 1 uF 10 VDC 10% 0402 X7S AEC-Q200,,Other,500,10,Mouser,81-GCM155C71A105KE8D,,,,,0.03,,,275422760
+Blue Label Box,K-02,C0603C330K5RACTU,Multilayer Ceramic Capacitors MLCC - SMD/SMT 50V 33pF X7R 0603 10%,,Other,40,10,Mouser,80-C0603C330K5RACTU,,,,,0.129,,,275422760
+Blue Label Box,K-08,AC0402JRX7R9BB472,Multilayer Ceramic Capacitors MLCC - SMD/SMT 50V 4700pF X7R 0402 5% AEC-Q200,,Other,100,10,Mouser,603-AC402JRX7R9BB472,,,,,0.021,,,275422760
+Blue Label Box,K-09,C0402C103J5RAC,Multilayer Ceramic Capacitors MLCC - SMD/SMT 50V 0.01uF X7R 0402 5%,,Other,100,10,Mouser,80-C0402C103J5RAC,,,,,0.014,,,275422760
+Blue Label Box,K-10,04025C104JAT2A,Multilayer Ceramic Capacitors MLCC - SMD/SMT 50V 0.1uF X7R 0402 5%,,Other,500,10,Mouser,581-04025C104JAT2A,,,,,0.022,,,275422760
+Blue Label Box,K-11,04025C102KAT2A-62,Multilayer Ceramic Capacitors MLCC - SMD/SMT 50V .001uF X7R 0402 10% -62C Storage Tem,,Other,500,10,Mouser,581-04025C102KAT2A62,,,,,0.006,,,275422760
+Blue Label Box,J-07,08055C103KAT2A,Multilayer Ceramic Capacitors MLCC - SMD/SMT KGM21NR71H103KT NEW GLOBAL PN 50V 0.01uF A 581-KGM21NR71H103KT,,Other,100,10,Mouser,581-08055C103K,,,,,0.028,,,275422760
+Blue Label Box,J-08,CL21B102KBCNNND,Multilayer Ceramic Capacitors MLCC - SMD/SMT 1nF0.150V X7R 2012 0805,,Other,100,10,Mouser,187-CL21B102KBCNNND,,,,,0.017,,,275422760
+Blue Label Box,K-03,MCASU168SB7104MTNA01,Multilayer Ceramic Capacitors MLCC - SMD/SMT 50V 0.1uF X7R 0603 20% AEC-Q200,,Other,100,10,Mouser,963-MCASU168SB7104MT,,,,,0.029,,,275422760
+Blue Label Box,K-12,GRM155Z71A225ME43D,Multilayer Ceramic Capacitors MLCC - SMD/SMT 2.2 uF 10 VDC 20% 0402 X7R,,Other,100,10,Mouser,81-GRM155Z71A225ME3D,,,,,0.05,,,275422760

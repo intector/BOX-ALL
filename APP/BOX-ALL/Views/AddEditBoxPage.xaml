@@ -1,0 +1,190 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:vm="clr-namespace:BOX_ALL.ViewModels"
+             xmlns:models="clr-namespace:BOX_ALL.Models"
+             x:Class="BOX_ALL.Views.AddEditBoxPage"
+             x:Name="ThisPage"
+             Title="{Binding PageTitle}"
+             BackgroundColor="{StaticResource BackgroundDark}">
+
+    <ScrollView>
+        <VerticalStackLayout Padding="20" Spacing="20">
+
+            <!-- Box Name -->
+            <VerticalStackLayout Spacing="5">
+                <Label Text="Box Name"
+                       TextColor="{StaticResource TextSecondary}"
+                       FontSize="14"
+                       FontFamily="UbuntuRegular"/>
+                <Frame BackgroundColor="{StaticResource SurfaceLight}"
+                       BorderColor="{StaticResource TextMuted}"
+                       CornerRadius="8"
+                       Padding="10,2"
+                       HasShadow="False">
+                    <Entry Text="{Binding BoxName}"
+                           Placeholder="e.g. Main Storage, Resistors Box"
+                           TextColor="{StaticResource TextPrimary}"
+                           PlaceholderColor="{StaticResource TextMuted}"
+                           BackgroundColor="Transparent"
+                           FontFamily="UbuntuCondensed"
+                           FontSize="14"
+                           HeightRequest="45"/>
+                </Frame>
+            </VerticalStackLayout>
+
+            <!-- Box Type - Radio Button List -->
+            <VerticalStackLayout Spacing="5">
+                <Label Text="Box Type"
+                       TextColor="{StaticResource TextSecondary}"
+                       FontSize="14"
+                       FontFamily="UbuntuRegular"/>
+
+                <VerticalStackLayout Spacing="8"
+                                     BindableLayout.ItemsSource="{Binding BoxTypes}">
+                    <BindableLayout.ItemTemplate>
+                        <DataTemplate x:DataType="models:BoxTypeOption">
+                            <Border Padding="0"
+                                    StrokeThickness="1.5"
+                                    BackgroundColor="{StaticResource Surface}">
+                                <Border.StrokeShape>
+                                    <RoundRectangle CornerRadius="8"/>
+                                </Border.StrokeShape>
+                                <Border.Stroke>
+                                    <SolidColorBrush Color="{StaticResource TextMuted}"/>
+                                </Border.Stroke>
+
+                                <!-- Selected state: change border color -->
+                                <Border.Triggers>
+                                    <DataTrigger TargetType="Border"
+                                                 Binding="{Binding IsSelected}"
+                                                 Value="True">
+                                        <Setter Property="Stroke" Value="{StaticResource Primary}"/>
+                                        <Setter Property="BackgroundColor" Value="#1A4A9EFF"/>
+                                    </DataTrigger>
+                                </Border.Triggers>
+
+                                <!-- Wrapper Grid for content + overlay -->
+                                <Grid>
+                                    <!-- Main content -->
+                                    <Grid ColumnDefinitions="Auto,*" ColumnSpacing="12"
+                                          Padding="12,10">
+
+                                        <!-- Radio circle indicator -->
+                                        <Grid Grid.Column="0"
+                                              WidthRequest="22" HeightRequest="22"
+                                              VerticalOptions="Center">
+                                            <!-- Outer circle -->
+                                            <Ellipse WidthRequest="22" HeightRequest="22"
+                                                     Stroke="{StaticResource TextMuted}"
+                                                     StrokeThickness="2"
+                                                     Fill="Transparent"/>
+                                            <!-- Inner filled circle (visible when selected) -->
+                                            <Ellipse WidthRequest="12" HeightRequest="12"
+                                                     Fill="{StaticResource Primary}"
+                                                     HorizontalOptions="Center"
+                                                     VerticalOptions="Center"
+                                                     IsVisible="{Binding IsSelected}"/>
+                                            <!-- Outer circle highlight when selected -->
+                                            <Ellipse WidthRequest="22" HeightRequest="22"
+                                                     Stroke="{StaticResource Primary}"
+                                                     StrokeThickness="2"
+                                                     Fill="Transparent"
+                                                     IsVisible="{Binding IsSelected}"/>
+                                        </Grid>
+
+                                        <!-- Type name and details -->
+                                        <VerticalStackLayout Grid.Column="1"
+                                                             VerticalOptions="Center"
+                                                             Spacing="2">
+                                            <Label Text="{Binding DisplayName}"
+                                                   TextColor="{StaticResource TextPrimary}"
+                                                   FontFamily="UbuntuRegular"
+                                                   FontSize="15"
+                                                   FontAttributes="Bold"/>
+                                            <Label Text="{Binding SubText}"
+                                                   TextColor="{StaticResource TextMuted}"
+                                                   FontFamily="UbuntuCondensed"
+                                                   FontSize="12"/>
+                                        </VerticalStackLayout>
+                                    </Grid>
+
+                                    <!-- Disabled overlay with Coming Soon badge -->
+                                    <Grid IsVisible="{Binding IsEnabled, Converter={StaticResource InvertedBoolConverter}}"
+                                          BackgroundColor="#CC0A0E27"
+                                          InputTransparent="False">
+                                        <Border Padding="10,5"
+                                                BackgroundColor="#334155"
+                                                HorizontalOptions="Center"
+                                                VerticalOptions="Center"
+                                                StrokeThickness="0">
+                                            <Border.StrokeShape>
+                                                <RoundRectangle CornerRadius="6"/>
+                                            </Border.StrokeShape>
+                                            <Label Text="Coming Soon"
+                                                   TextColor="{StaticResource TextSecondary}"
+                                                   FontFamily="UbuntuCondensed"
+                                                   FontSize="13"
+                                                   FontAttributes="Bold"/>
+                                        </Border>
+                                    </Grid>
+
+                                    <!-- Tap handler via code-behind -->
+                                    <Grid.GestureRecognizers>
+                                        <TapGestureRecognizer Tapped="OnBoxTypeTapped"/>
+                                    </Grid.GestureRecognizers>
+                                </Grid>
+                            </Border>
+                        </DataTemplate>
+                    </BindableLayout.ItemTemplate>
+                </VerticalStackLayout>
+            </VerticalStackLayout>
+
+            <!-- Anti-Static Option -->
+            <HorizontalStackLayout Spacing="10">
+                <CheckBox IsChecked="{Binding IsAntiStatic}"
+                          IsEnabled="{Binding AntiStaticEnabled}"
+                          Color="{StaticResource Success}"/>
+                <Label Text="Anti-Static (AS)"
+                       TextColor="{StaticResource TextPrimary}"
+                       VerticalOptions="Center"
+                       FontSize="14"
+                       FontFamily="UbuntuRegular">
+                    <Label.Triggers>
+                        <DataTrigger TargetType="Label"
+                                     Binding="{Binding AntiStaticEnabled}"
+                                     Value="False">
+                            <Setter Property="TextColor" Value="{StaticResource TextDisabled}"/>
+                        </DataTrigger>
+                    </Label.Triggers>
+                </Label>
+            </HorizontalStackLayout>
+
+            <Label Text="(Anti-static coating protects ESD-sensitive components)"
+                   TextColor="{StaticResource TextMuted}"
+                   FontSize="12"
+                   FontFamily="UbuntuCondensed"
+                   Margin="0,-10,0,0"
+                   IsVisible="{Binding AntiStaticEnabled}"/>
+
+            <!-- Buttons -->
+            <Grid ColumnDefinitions="*,*" ColumnSpacing="15" Margin="0,20,0,0">
+                <Button Grid.Column="0"
+                        Text="Cancel"
+                        BackgroundColor="{StaticResource Gray600}"
+                        TextColor="{StaticResource White}"
+                        Command="{Binding CancelCommand}"
+                        FontFamily="UbuntuRegular"/>
+
+                <Button Grid.Column="1"
+                        Text="{Binding SaveButtonText}"
+                        BackgroundColor="{StaticResource Success}"
+                        TextColor="{StaticResource BackgroundDark}"
+                        Command="{Binding SaveCommand}"
+                        FontAttributes="Bold"
+                        FontFamily="UbuntuRegular"/>
+            </Grid>
+
+        </VerticalStackLayout>
+    </ScrollView>
+</ContentPage>

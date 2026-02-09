@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="BOX_ALL.Views.AnimatedSplashPage"
+             Shell.NavBarIsVisible="False"
+             BackgroundColor="{StaticResource BackgroundDark}">
+
+    <Grid>
+        <!-- Main Logo -->
+        <Image x:Name="SplashLogo"
+               Source="ani_splash.png"
+               WidthRequest="300"
+               HeightRequest="300"
+               HorizontalOptions="Center"
+               VerticalOptions="Center"
+               Opacity="0"
+               Scale="0.3"/>
+
+        <!-- Optional: App Version at bottom -->
+        <Label x:Name="VersionLabel"
+               Text="Version 1.0"
+               TextColor="{StaticResource TextSecondary}"
+               FontSize="12"
+               HorizontalOptions="Center"
+               VerticalOptions="End"
+               Margin="0,0,0,30"
+               Opacity="0"/>
+    </Grid>
+</ContentPage>

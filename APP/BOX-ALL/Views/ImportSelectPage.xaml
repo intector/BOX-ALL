@@ -1,0 +1,263 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:vm="clr-namespace:BOX_ALL.ViewModels"
+             x:Class="BOX_ALL.Views.ImportSelectPage"
+             x:DataType="vm:ImportSelectViewModel"
+             Title="Import Boxes"
+             BackgroundColor="{StaticResource BackgroundDark}">
+
+    <!-- ToolbarItem doesn't support IsVisible, so we'll add this functionality differently if needed -->
+    <!--<ContentPage.ToolbarItems>
+        <ToolbarItem Text="Change Folder" 
+                     Command="{Binding RecoverFolderCommand}"
+                     Order="Secondary" />
+    </ContentPage.ToolbarItems>-->
+
+    <Grid>
+        <!-- Main content -->
+        <Grid IsVisible="{Binding RequiresRecovery, Converter={StaticResource InvertedBoolConverter}}">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
+
+            <!-- Header with count -->
+            <Border Grid.Row="0" 
+                    Margin="20,10"
+                    BackgroundColor="{StaticResource Surface}"
+                    StrokeThickness="0"
+                    Padding="15"
+                    IsVisible="{Binding AvailableFiles.Count, Converter={StaticResource IntToBoolConverter}}">
+                <Border.StrokeShape>
+                    <RoundRectangle CornerRadius="8"/>
+                </Border.StrokeShape>
+
+                <Grid>
+                    <Label HorizontalOptions="Start">
+                        <Label.FormattedText>
+                            <FormattedString>
+                                <Span Text="{Binding AvailableFiles.Count}" FontAttributes="Bold" TextColor="{StaticResource Primary}"/>
+                                <Span Text=" export file(s) found" TextColor="{StaticResource TextPrimary}"/>
+                            </FormattedString>
+                        </Label.FormattedText>
+                    </Label>
+
+                    <HorizontalStackLayout HorizontalOptions="End" Spacing="10">
+                        <Label IsVisible="{Binding HasOverwrites}">
+                            <Label.FormattedText>
+                                <FormattedString>
+                                    <Span Text="⚠️ " TextColor="{StaticResource Warning}"/>
+                                    <Span Text="{Binding OverwriteCount}" TextColor="{StaticResource Warning}"/>
+                                    <Span Text=" to overwrite" TextColor="{StaticResource TextMuted}"/>
+                                </FormattedString>
+                            </Label.FormattedText>
+                        </Label>
+
+                        <Label IsVisible="{Binding HasNewBoxes}">
+                            <Label.FormattedText>
+                                <FormattedString>
+                                    <Span Text="✨ " TextColor="{StaticResource Success}"/>
+                                    <Span Text="{Binding NewBoxCount}" TextColor="{StaticResource Success}"/>
+                                    <Span Text=" new" TextColor="{StaticResource TextMuted}"/>
+                                </FormattedString>
+                            </Label.FormattedText>
+                        </Label>
+                    </HorizontalStackLayout>
+                </Grid>
+            </Border>
+
+            <!-- File list -->
+            <CollectionView Grid.Row="1" 
+                            ItemsSource="{Binding AvailableFiles}"
+                            SelectionMode="None"
+                            Margin="10,0">
+                <CollectionView.ItemTemplate>
+                    <DataTemplate x:DataType="vm:ImportFileViewModel">
+                        <Border Margin="10,5" 
+                                BackgroundColor="{StaticResource Surface}"
+                                StrokeThickness="0"
+                                Padding="0">
+                            <Border.StrokeShape>
+                                <RoundRectangle CornerRadius="8"/>
+                            </Border.StrokeShape>
+
+                            <Border.GestureRecognizers>
+                                <TapGestureRecognizer 
+                                    Command="{Binding Source={RelativeSource AncestorType={x:Type vm:ImportSelectViewModel}}, Path=ToggleSelectionCommand}"
+                                    CommandParameter="{Binding .}"/>
+                            </Border.GestureRecognizers>
+
+                            <Grid Padding="15">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="Auto"/>
+                                    <ColumnDefinition Width="Auto"/>
+                                    <ColumnDefinition Width="*"/>
+                                    <ColumnDefinition Width="Auto"/>
+                                </Grid.ColumnDefinitions>
+
+                                <!-- Checkbox -->
+                                <CheckBox Grid.Column="0" 
+                                          IsChecked="{Binding IsSelected}"
+                                          Color="{StaticResource Success}"
+                                          VerticalOptions="Center"/>
+
+                                <!-- Status Icon -->
+                                <Label Grid.Column="1" 
+                                       VerticalOptions="Center"
+                                       Margin="10,0"
+                                       FontSize="20">
+                                    <Label.Triggers>
+                                        <DataTrigger TargetType="Label" 
+                                                     Binding="{Binding IsExistingBox}" 
+                                                     Value="True">
+                                            <Setter Property="Text" Value="⚠️"/>
+                                        </DataTrigger>
+                                        <DataTrigger TargetType="Label" 
+                                                     Binding="{Binding IsNewBox}" 
+                                                     Value="True">
+                                            <Setter Property="Text" Value="✨"/>
+                                        </DataTrigger>
+                                    </Label.Triggers>
+                                </Label>
+
+                                <!-- Box Info -->
+                                <VerticalStackLayout Grid.Column="2" 
+                                                     VerticalOptions="Center"
+                                                     Spacing="2">
+                                    <Label Text="{Binding BoxName}" 
+                                           TextColor="{StaticResource TextPrimary}"
+                                           FontAttributes="Bold"
+                                           FontSize="16"/>
+                                    <Label TextColor="{StaticResource TextMuted}"
+                                           FontSize="13">
+                                        <Label.FormattedText>
+                                            <FormattedString>
+                                                <Span Text="{Binding BoxType}"/>
+                                                <Span Text=" • "/>
+                                                <Span Text="{Binding ComponentCount}"/>
+                                                <Span Text=" components"/>
+                                            </FormattedString>
+                                        </Label.FormattedText>
+                                    </Label>
+                                    <Label Text="{Binding ExportDate, StringFormat='Exported: {0:MMM dd, yyyy HH:mm}'}"
+                                           TextColor="{StaticResource TextMuted}"
+                                           FontSize="11"/>
+                                </VerticalStackLayout>
+
+                                <!-- Arrow -->
+                                <Label Grid.Column="3"
+                                       Text="›"
+                                       TextColor="{StaticResource TextMuted}"
+                                       FontSize="24"
+                                       VerticalOptions="Center"/>
+                            </Grid>
+                        </Border>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+
+                <!-- Empty state -->
+                <CollectionView.EmptyView>
+                    <VerticalStackLayout VerticalOptions="Center"
+                                         HorizontalOptions="Center"
+                                         Spacing="20"
+                                         Margin="40">
+                        <Label Text="📦"
+                               FontSize="72"
+                               HorizontalOptions="Center"/>
+                        <Label Text="No Export Files Found"
+                               TextColor="{StaticResource TextPrimary}"
+                               FontSize="20"
+                               FontAttributes="Bold"
+                               HorizontalTextAlignment="Center"/>
+                        <Label Text="Export some boxes first to create backup files, or check if files are in the correct location."
+                               TextColor="{StaticResource TextMuted}"
+                               HorizontalTextAlignment="Center"
+                               LineBreakMode="WordWrap"/>
+                        <Label TextColor="{StaticResource TextMuted}"
+                               FontSize="12"
+                               HorizontalTextAlignment="Center"
+                               LineBreakMode="WordWrap">
+                            <Label.FormattedText>
+                                <FormattedString>
+                                    <Span Text="Expected location: "/>
+                                    <Span Text="{Binding ExportFolderPath}" FontFamily="UbuntuMono"/>
+                                </FormattedString>
+                            </Label.FormattedText>
+                        </Label>
+
+                        <!-- Show recover button if applicable -->
+                        <Button Text="Try Folder Recovery"
+                                Command="{Binding RecoverFolderCommand}"
+                                BackgroundColor="{StaticResource Primary}"
+                                TextColor="{StaticResource BackgroundDark}"
+                                CornerRadius="8"
+                                Padding="20,10"
+                                HorizontalOptions="Center"
+                                IsVisible="{Binding RequiresRecovery}"/>
+                    </VerticalStackLayout>
+                </CollectionView.EmptyView>
+            </CollectionView>
+
+            <!-- Action buttons -->
+            <Grid Grid.Row="2" 
+                  Padding="20,10"
+                  ColumnDefinitions="*,*"
+                  ColumnSpacing="10"
+                  IsVisible="{Binding AvailableFiles.Count, Converter={StaticResource IntToBoolConverter}}">
+
+                <Button Grid.Column="0"
+                        Text="Cancel"
+                        Command="{Binding CancelCommand}"
+                        BackgroundColor="{StaticResource Surface}"
+                        TextColor="{StaticResource TextPrimary}"
+                        BorderColor="{StaticResource TextMuted}"
+                        BorderWidth="1"
+                        CornerRadius="8"/>
+
+                <Button Grid.Column="1"
+                        Text="{Binding SelectedCount, StringFormat='Import ({0})'}"
+                        Command="{Binding ImportCommand}"
+                        BackgroundColor="{StaticResource Primary}"
+                        TextColor="{StaticResource BackgroundDark}"
+                        CornerRadius="8"
+                        IsEnabled="{Binding HasSelection}">
+                    <Button.Triggers>
+                        <DataTrigger TargetType="Button"
+                                     Binding="{Binding HasSelection}"
+                                     Value="False">
+                            <Setter Property="Opacity" Value="0.5"/>
+                        </DataTrigger>
+                    </Button.Triggers>
+                </Button>
+            </Grid>
+        </Grid>
+
+        <!-- Loading overlay -->
+        <Grid IsVisible="{Binding IsBusy}"
+              BackgroundColor="#AA000000">
+            <Border BackgroundColor="{StaticResource Surface}"
+                    WidthRequest="250"
+                    HeightRequest="100"
+                    HorizontalOptions="Center"
+                    VerticalOptions="Center">
+                <Border.StrokeShape>
+                    <RoundRectangle CornerRadius="10"/>
+                </Border.StrokeShape>
+
+                <VerticalStackLayout HorizontalOptions="Center"
+                                     VerticalOptions="Center"
+                                     Spacing="10">
+                    <ActivityIndicator IsRunning="True"
+                                       Color="{StaticResource Primary}"
+                                       WidthRequest="40"
+                                       HeightRequest="40"/>
+                    <Label Text="{Binding StatusMessage}"
+                           TextColor="{StaticResource TextPrimary}"
+                           HorizontalTextAlignment="Center"/>
+                </VerticalStackLayout>
+            </Border>
+        </Grid>
+    </Grid>
+</ContentPage>

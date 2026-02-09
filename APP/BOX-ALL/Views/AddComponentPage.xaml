@@ -1,0 +1,293 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="BOX_ALL.Views.AddComponentPage"
+             Title="{Binding PageTitle}"
+             BackgroundColor="{StaticResource BackgroundDark}">
+
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <!-- Custom Entry Style with Border -->
+            <Style x:Key="RoundedEntry" TargetType="Entry">
+                <Setter Property="TextColor" Value="{StaticResource TextPrimary}"/>
+                <Setter Property="PlaceholderColor" Value="{StaticResource TextMuted}"/>
+                <Setter Property="BackgroundColor" Value="Transparent"/>
+                <Setter Property="FontFamily" Value="UbuntuCondensed"/>
+                <Setter Property="FontSize" Value="14"/>
+                <Setter Property="HeightRequest" Value="45"/>
+            </Style>
+
+            <Style x:Key="RoundedEditor" TargetType="Editor">
+                <Setter Property="TextColor" Value="{StaticResource TextPrimary}"/>
+                <Setter Property="PlaceholderColor" Value="{StaticResource TextMuted}"/>
+                <Setter Property="BackgroundColor" Value="Transparent"/>
+                <Setter Property="FontFamily" Value="UbuntuCondensed"/>
+                <Setter Property="FontSize" Value="14"/>
+            </Style>
+
+            <Style x:Key="RoundedPicker" TargetType="Picker">
+                <Setter Property="TextColor" Value="{StaticResource TextPrimary}"/>
+                <Setter Property="BackgroundColor" Value="Transparent"/>
+                <Setter Property="FontFamily" Value="UbuntuCondensed"/>
+                <Setter Property="FontSize" Value="14"/>
+                <Setter Property="HeightRequest" Value="45"/>
+            </Style>
+
+            <Style x:Key="InputFrame" TargetType="Frame">
+                <Setter Property="BackgroundColor" Value="{StaticResource SurfaceLight}"/>
+                <Setter Property="BorderColor" Value="{StaticResource TextMuted}"/>
+                <Setter Property="CornerRadius" Value="8"/>
+                <Setter Property="Padding" Value="10,2"/>
+                <Setter Property="HasShadow" Value="False"/>
+            </Style>
+        </ResourceDictionary>
+    </ContentPage.Resources>
+
+    <Grid>
+        <ScrollView>
+            <VerticalStackLayout Padding="20" Spacing="15">
+
+                <!-- Basic Information -->
+                <Frame BackgroundColor="{StaticResource Surface}"
+                       BorderColor="Transparent"
+                       Padding="15">
+                    <VerticalStackLayout Spacing="10">
+                        <Label Text="Basic Information" 
+                               Style="{StaticResource SectionTitle}"/>
+
+                        <Label Text="MFG Part Number *" 
+                               TextColor="{StaticResource TextSecondary}"/>
+                        <Frame Style="{StaticResource InputFrame}">
+                            <Entry Text="{Binding Component.PartNumber}"
+                                   Placeholder="e.g. R10K, NE555"
+                                   Style="{StaticResource RoundedEntry}"
+                                   Focused="OnEntryFocused"
+                                   Unfocused="OnEntryUnfocused"/>
+                        </Frame>
+
+                        <Label Text="Manufacturer" 
+                               TextColor="{StaticResource TextSecondary}"/>
+                        <Frame Style="{StaticResource InputFrame}">
+                            <Entry Text="{Binding Component.Manufacturer}"
+                                   Placeholder="e.g. Texas Instruments"
+                                   Style="{StaticResource RoundedEntry}"
+                                   Focused="OnEntryFocused"
+                                   Unfocused="OnEntryUnfocused"/>
+                        </Frame>
+
+                        <Label Text="Description" 
+                               TextColor="{StaticResource TextSecondary}"/>
+                        <Frame Style="{StaticResource InputFrame}">
+                            <Entry Text="{Binding Component.Description}"
+                                   Placeholder="e.g. Resistor 10K Ohm 1/4W"
+                                   Style="{StaticResource RoundedEntry}"
+                                   Focused="OnEntryFocused"
+                                   Unfocused="OnEntryUnfocused"/>
+                        </Frame>
+
+                        <Label Text="Category" 
+                               TextColor="{StaticResource TextSecondary}"/>
+                        <Frame Style="{StaticResource InputFrame}">
+                            <Picker ItemsSource="{Binding Categories}"
+                                    SelectedItem="{Binding SelectedCategory}"
+                                    Style="{StaticResource RoundedPicker}"/>
+                        </Frame>
+
+                        <Label Text="Supplier Part Number" 
+                               TextColor="{StaticResource TextSecondary}"/>
+                        <Frame Style="{StaticResource InputFrame}">
+                            <Entry Text="{Binding Component.SupplierPartNumber}"
+                                   Placeholder="e.g. 1234567-ND"
+                                   Style="{StaticResource RoundedEntry}"
+                                   Focused="OnEntryFocused"
+                                   Unfocused="OnEntryUnfocused"/>
+                        </Frame>
+
+                        <Label Text="Supplier" 
+                               TextColor="{StaticResource TextSecondary}"/>
+                        <Frame Style="{StaticResource InputFrame}">
+                            <Entry Text="{Binding Supplier}"
+                                   Placeholder="e.g. DigiKey, Mouser, LCSC"
+                                   Style="{StaticResource RoundedEntry}"
+                                   Focused="OnEntryFocused"
+                                   Unfocused="OnEntryUnfocused"/>
+                        </Frame>
+                    </VerticalStackLayout>
+                </Frame>
+
+                <!-- Storage Location -->
+                <Frame BackgroundColor="{StaticResource Surface}"
+                       BorderColor="Transparent"
+                       Padding="15">
+                    <VerticalStackLayout Spacing="10">
+                        <Label Text="Storage Location" 
+                               Style="{StaticResource SectionTitle}"/>
+
+                        <Label Text="Position *" 
+                               TextColor="{StaticResource TextSecondary}"/>
+                        <Frame Style="{StaticResource InputFrame}">
+                            <Picker ItemsSource="{Binding AvailablePositions}"
+                                    SelectedItem="{Binding SelectedPosition}"
+                                    Title="Select compartment..."
+                                    Style="{StaticResource RoundedPicker}"
+                                    FontFamily="UbuntuMono"/>
+                        </Frame>
+
+                        <!-- Warning for existing component -->
+                        <Frame BackgroundColor="{StaticResource Warning}"
+                               BorderColor="Transparent"
+                               Padding="10"
+                               IsVisible="{Binding ShowExistingWarning}">
+                            <Label Text="{Binding ExistingComponentWarning}"
+                                   TextColor="{StaticResource BackgroundDark}"
+                                   FontSize="12"/>
+                        </Frame>
+
+                        <Grid ColumnDefinitions="*,*" ColumnSpacing="10">
+                            <VerticalStackLayout Grid.Column="0" Spacing="5">
+                                <Label Text="Quantity" 
+                                       TextColor="{StaticResource TextSecondary}"/>
+                                <Frame Style="{StaticResource InputFrame}">
+                                    <Entry Text="{Binding Quantity}"
+                                           Keyboard="Numeric"
+                                           Placeholder="0"
+                                           Style="{StaticResource RoundedEntry}"
+                                           Focused="OnEntryFocused"
+                                           Unfocused="OnEntryUnfocused"/>
+                                </Frame>
+                            </VerticalStackLayout>
+
+                            <VerticalStackLayout Grid.Column="1" Spacing="5">
+                                <Label Text="Min Stock Level" 
+                                       TextColor="{StaticResource TextSecondary}"/>
+                                <Frame Style="{StaticResource InputFrame}">
+                                    <Entry Text="{Binding MinQuantity}"
+                                           Keyboard="Numeric"
+                                           Placeholder="10"
+                                           Style="{StaticResource RoundedEntry}"
+                                           Focused="OnEntryFocused"
+                                           Unfocused="OnEntryUnfocused"/>
+                                </Frame>
+                            </VerticalStackLayout>
+                        </Grid>
+                    </VerticalStackLayout>
+                </Frame>
+
+                <!-- Technical Specifications (Optional) -->
+                <Frame BackgroundColor="{StaticResource Surface}"
+                       BorderColor="Transparent"
+                       Padding="15">
+                    <VerticalStackLayout Spacing="10">
+                        <Label Text="Technical Specifications (Optional)" 
+                               Style="{StaticResource SectionTitle}"/>
+
+                        <Grid ColumnDefinitions="*,*" RowDefinitions="Auto,Auto"
+                              ColumnSpacing="10" RowSpacing="10">
+
+                            <VerticalStackLayout Grid.Column="0" Grid.Row="0" Spacing="5">
+                                <Label Text="Value" 
+                                       TextColor="{StaticResource TextSecondary}"
+                                       FontSize="12"/>
+                                <Frame Style="{StaticResource InputFrame}">
+                                    <Entry Text="{Binding Component.Value}"
+                                           Placeholder="e.g. 10K, 100nF"
+                                           Style="{StaticResource RoundedEntry}"
+                                           Focused="OnEntryFocused"
+                                           Unfocused="OnEntryUnfocused"/>
+                                </Frame>
+                            </VerticalStackLayout>
+
+                            <VerticalStackLayout Grid.Column="1" Grid.Row="0" Spacing="5">
+                                <Label Text="Package" 
+                                       TextColor="{StaticResource TextSecondary}"
+                                       FontSize="12"/>
+                                <Frame Style="{StaticResource InputFrame}">
+                                    <Entry Text="{Binding Component.Package}"
+                                           Placeholder="e.g. 0805, DIP-8"
+                                           Style="{StaticResource RoundedEntry}"
+                                           Focused="OnEntryFocused"
+                                           Unfocused="OnEntryUnfocused"/>
+                                </Frame>
+                            </VerticalStackLayout>
+
+                            <VerticalStackLayout Grid.Column="0" Grid.Row="1" Spacing="5">
+                                <Label Text="Tolerance" 
+                                       TextColor="{StaticResource TextSecondary}"
+                                       FontSize="12"/>
+                                <Frame Style="{StaticResource InputFrame}">
+                                    <Entry Text="{Binding Component.Tolerance}"
+                                           Placeholder="e.g. 1%, 5%"
+                                           Style="{StaticResource RoundedEntry}"
+                                           Focused="OnEntryFocused"
+                                           Unfocused="OnEntryUnfocused"/>
+                                </Frame>
+                            </VerticalStackLayout>
+
+                            <VerticalStackLayout Grid.Column="1" Grid.Row="1" Spacing="5">
+                                <Label Text="Voltage" 
+                                       TextColor="{StaticResource TextSecondary}"
+                                       FontSize="12"/>
+                                <Frame Style="{StaticResource InputFrame}">
+                                    <Entry Text="{Binding Component.Voltage}"
+                                           Placeholder="e.g. 50V, 3.3V"
+                                           Style="{StaticResource RoundedEntry}"
+                                           Focused="OnEntryFocused"
+                                           Unfocused="OnEntryUnfocused"/>
+                                </Frame>
+                            </VerticalStackLayout>
+                        </Grid>
+                    </VerticalStackLayout>
+                </Frame>
+
+                <!-- Notes -->
+                <Frame BackgroundColor="{StaticResource Surface}"
+                       BorderColor="Transparent"
+                       Padding="15">
+                    <VerticalStackLayout Spacing="10">
+                        <Label Text="Notes" 
+                               TextColor="{StaticResource TextSecondary}"/>
+                        <Frame Style="{StaticResource InputFrame}"
+                               MinimumHeightRequest="100">
+                            <Editor Text="{Binding Component.Notes}"
+                                    Placeholder="Additional notes..."
+                                    Style="{StaticResource RoundedEditor}"
+                                    MinimumHeightRequest="80"/>
+                        </Frame>
+                    </VerticalStackLayout>
+                </Frame>
+
+                <!-- Action Buttons -->
+                <Grid ColumnDefinitions="*,*" ColumnSpacing="15" Margin="0,10">
+                    <Button Grid.Column="0"
+                            Text="Cancel"
+                            BackgroundColor="{StaticResource Gray600}"
+                            TextColor="{StaticResource White}"
+                            Command="{Binding CancelCommand}"/>
+
+                    <Button Grid.Column="1"
+                            Text="{Binding PageTitle, StringFormat='Save'}"
+                            BackgroundColor="{StaticResource Success}"
+                            TextColor="{StaticResource BackgroundDark}"
+                            Command="{Binding SaveCommand}"
+                            FontAttributes="Bold"/>
+                </Grid>
+
+                <!-- Delete Button (only visible in edit mode) -->
+                <Button Text="Delete Component"
+                        BackgroundColor="{StaticResource Error}"
+                        TextColor="{StaticResource White}"
+                        Command="{Binding DeleteCommand}"
+                        IsVisible="{Binding EditMode}"
+                        Margin="0,0,0,20"/>
+
+            </VerticalStackLayout>
+        </ScrollView>
+
+        <!-- Loading Indicator -->
+        <ActivityIndicator IsRunning="{Binding IsBusy}"
+                           IsVisible="{Binding IsBusy}"
+                           Color="{StaticResource Primary}"
+                           VerticalOptions="Center"
+                           HorizontalOptions="Center"/>
+    </Grid>
+</ContentPage>

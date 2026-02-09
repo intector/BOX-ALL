@@ -1,0 +1,58 @@
+{
+  "exportDate": "2026-02-08T23:57:05.2216015Z",
+  "appVersion": "1.0.0",
+  "boxes": [
+    {
+      "boxId": "box_2001",
+      "name": "Blue Label Box",
+      "type": "BOXALL144",
+      "rows": 12,
+      "columns": 12,
+      "totalCompartments": 144,
+      "occupiedCount": 0,
+      "compartments": []
+    },
+    {
+      "boxId": "box_2000",
+      "name": "General Parts",
+      "type": "BOXALL144",
+      "rows": 12,
+      "columns": 12,
+      "totalCompartments": 144,
+      "occupiedCount": 0,
+      "compartments": []
+    },
+    {
+      "boxId": "box_1000",
+      "name": "Small Box",
+      "type": "BOXALL96",
+      "rows": 10,
+      "columns": 12,
+      "totalCompartments": 96,
+      "occupiedCount": 0,
+      "compartments": []
+    }
+  ],
+  "categories": [
+    "Button",
+    "Capacitor",
+    "Connector",
+    "Crystal",
+    "Diode",
+    "Display",
+    "Fuse",
+    "IC",
+    "Inductor",
+    "LED",
+    "Microcontroller",
+    "MOSFET",
+    "Op-Amp",
+    "Relay",
+    "Resistor",
+    "Sensor",
+    "Switch",
+    "Transistor",
+    "Voltage Regulator",
+    "Other"
+  ]
+}

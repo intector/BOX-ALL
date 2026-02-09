@@ -1,0 +1,166 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="BOX_ALL.Views.DashboardPage"
+             Title="Dashboard"
+             BackgroundColor="#0A0E27">
+
+    <VerticalStackLayout Padding="20" Spacing="20">
+
+        <!-- Title - Always visible -->
+        <Label Text="BOX-ALL"
+               FontSize="28"
+               FontFamily="StencilFont"
+               TextColor="{StaticResource TextSecondary}"
+               HorizontalOptions="Center"/>
+
+        <!-- Simple Empty State - Show when ShowEmptyState is true -->
+        <Grid
+              VerticalOptions="Center"
+              IsVisible="{Binding ShowEmptyState}">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
+
+            <Image Grid.Row="0" Source="box_stack_tr.png"
+                   WidthRequest="120"
+                   HeightRequest="120"
+                   HorizontalOptions="Center"/>
+
+            <Label Grid.Row="1"
+                   Text="No Storage Boxes Yet"
+                   FontSize="20"
+                   TextColor="{StaticResource TextPrimary}"
+                   HorizontalOptions="Center"
+                   Margin="0,10,0,0"/>
+
+            <Label Grid.Row="2"
+                   Text="Create your first storage box to start organizing components"
+                   FontSize="14"
+                   TextColor="{StaticResource TextMuted}"
+                   HorizontalOptions="Center"
+                   HorizontalTextAlignment="Center"
+                   Margin="20,5,20,0"/>
+
+            <Button Grid.Row="3"
+                    Text="Create Your First Box"
+                    Command="{Binding CreateBoxCommand}"
+                    BackgroundColor="{StaticResource Primary}"
+                    TextColor="White"
+                    FontSize="16"
+                    Padding="20,12"
+                    HorizontalOptions="Center"
+                    Margin="0,20,0,0"/>
+        </Grid>
+
+        <!-- Box Selector Picker - Only show when boxes exist -->
+        <Frame IsVisible="{Binding HasBoxes}"
+               BackgroundColor="{StaticResource Surface}"
+               BorderColor="Transparent"
+               Padding="10"
+               CornerRadius="8">
+            <Picker Title="Select a storage box..."
+                    ItemsSource="{Binding BoxList}"
+                    SelectedItem="{Binding SelectedBox}"
+                    ItemDisplayBinding="{Binding Name}"
+                    TextColor="{StaticResource TextPrimary}"
+                    TitleColor="{StaticResource TextMuted}"
+                    FontSize="16"
+                    FontFamily="UbuntuRegular"/>
+        </Frame>
+
+        <!-- Stats Grid - Only show when boxes exist -->
+        <Grid IsVisible="{Binding HasBoxes}"
+              ColumnDefinitions="*,*,*,*"
+              ColumnSpacing="8">
+
+            <!-- Components -->
+            <Border Grid.Column="0"
+                    BackgroundColor="{StaticResource Surface}"
+                    StrokeShape="RoundRectangle 8"
+                    Stroke="Transparent"
+                    Padding="8">
+                <VerticalStackLayout HorizontalOptions="Center" Spacing="2">
+                    <Label Text="{Binding TotalComponents}"
+                           FontSize="24"
+                           TextColor="#4A9EFF"
+                           HorizontalOptions="Center"/>
+                    <Label Text="Total"
+                           FontSize="12"
+                           TextColor="#64748B"
+                           HorizontalOptions="Center"/>
+                </VerticalStackLayout>
+            </Border>
+
+            <!-- Locations -->
+            <Border Grid.Column="1"
+                    BackgroundColor="{StaticResource Surface}"
+                    StrokeShape="RoundRectangle 8"
+                    Stroke="Transparent"
+                    Padding="8">
+                <VerticalStackLayout HorizontalOptions="Center" Spacing="2">
+                    <Label Text="{Binding LocationsUsed}"
+                           FontSize="24"
+                           TextColor="#10B981"
+                           HorizontalOptions="Center"/>
+                    <Label Text="Used"
+                           FontSize="12"
+                           TextColor="#64748B"
+                           HorizontalOptions="Center"/>
+                </VerticalStackLayout>
+            </Border>
+
+            <!-- Low Stock -->
+            <Border Grid.Column="2"
+                    BackgroundColor="{StaticResource Surface}"
+                    StrokeShape="RoundRectangle 8"
+                    Stroke="Transparent"
+                    Padding="8">
+                <VerticalStackLayout HorizontalOptions="Center" Spacing="2">
+                    <Label Text="{Binding LowStockCount}"
+                           FontSize="24"
+                           TextColor="#F59E0B"
+                           HorizontalOptions="Center"/>
+                    <Label Text="Low"
+                           FontSize="12"
+                           TextColor="#64748B"
+                           HorizontalOptions="Center"/>
+                </VerticalStackLayout>
+            </Border>
+
+            <!-- Alerts -->
+            <Border Grid.Column="3"
+                    BackgroundColor="{StaticResource Surface}"
+                    StrokeShape="RoundRectangle 8"
+                    Stroke="Transparent"
+                    Padding="8">
+                <VerticalStackLayout HorizontalOptions="Center" Spacing="2">
+                    <Label Text="{Binding AlertsCount}"
+                           FontSize="24"
+                           TextColor="#EF4444"
+                           HorizontalOptions="Center"/>
+                    <Label Text="Alerts"
+                           FontSize="12"
+                           TextColor="#64748B"
+                           HorizontalOptions="Center"/>
+                </VerticalStackLayout>
+            </Border>
+        </Grid>
+
+        <!-- View Box Button - Only show when boxes exist and one is selected -->
+        <Button Text="View Box"
+                Command="{Binding ViewBoxCommand}"
+                BackgroundColor="#10B981"
+                TextColor="White"
+                FontSize="16"
+                Padding="12,14"
+                HorizontalOptions="Center"
+                IsVisible="{Binding HasBoxes}"
+                IsEnabled="{Binding HasSelectedBox}"/>
+
+    </VerticalStackLayout>
+
+</ContentPage>

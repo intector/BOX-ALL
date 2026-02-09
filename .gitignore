@@ -1,0 +1,43 @@
+# === Project files not for GitHub ===
+path_tree_and_files_comlete.md
+APP/box-all_project_export.txt
+APP/Export-MAUIProject.ps1
+templates/boxall_import_template.csv
+
+# Keep only the sample order file (275422760.xls)
+order lists/*
+!order lists/275422760.xls
+
+# === .NET / Visual Studio ===
+*.user
+*.suo
+*.userosscache
+*.sln.docstates
+bin/
+obj/
+.vs/
+*.rsuser
+TestResults/
+[Dd]ebugPublic/
+[Rr]elease/
+[Rr]eleases/
+x64/
+x86/
+[Ww][Ii][Nn]32/
+[Aa][Rr][Mm]/
+[Aa][Rr][Mm]64/
+bld/
+[Bb]in/
+[Oo]bj/
+[Ll]og/
+[Ll]ogs/
+
+# === MAUI / Android ===
+*.apk
+*.aab
+*.ipa
+
+# === OS files ===
+.DS_Store
+Thumbs.db
+desktop.ini
